@@ -24,8 +24,9 @@ salliessa luolaston huondeiden ja käytävien määrät ovat ainakin tietyssä m
 
 #### Tavoitteena olevat aika- ja tilavaativuudet (m.m. O-analyysit)
 Luolaston huoneiden lisäämisen pitäisi toimia ainakin lineaarisessa ajassa lisättyjen huoneiden määrään eli O(n)
+Huoneen lisääminen ei vie huomattavaa määrää tilaa, joten tilavaativuus on vakio O(1)
 
-
+Kruskalin algoritmin aikavaativuus on O(n + m log n), joten se on tavoitteena. Tilavaativuutena on O(n log m)
 
 
 #### Lähteet
