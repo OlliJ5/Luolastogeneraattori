@@ -41,30 +41,53 @@ public class Dungeon {
         Random random = new Random();
         int x = random.nextInt(this.width - 2) + 1;
         int y = random.nextInt(this.height - 2) + 1;
+
+        int height = random.nextInt(3) + 2;
+        int width = random.nextInt(3) + 2;
         
-        if (checkIfRoomIsValid(x, y, 2, 2)) {
-            this.dungeon[y][x] = ".";
-            this.dungeon[y][x + 1] = ".";
-            this.dungeon[y + 1][x] = ".";
-            this.dungeon[y + 1][x + 1] = ".";
+        if (checkIfRoomIsValid(x, y, height, width)) {
+            for(int i = 0; i < height; i++) {
+                for(int j = 0; j < width; j++) {
+                    dungeon[y + i][x + j] = ".";
+                }
+            }
+
         }
 
     }
 
     public boolean checkIfRoomIsValid(int x, int y, int height, int width) {
+        if(isRoomOutOfBounds(x, y, height, width)) {
+            return false;
+        } else if(roomOverlaps(x, y, height, width)) {
+            return false;
+        }   
+        
+        return true;
+
+    }
+    
+    public boolean roomOverlaps(int x, int y, int height, int width) {
+        
+        
+        
+        return false;
+    }
+
+    public boolean isRoomOutOfBounds(int x, int y, int height, int width) {
         for (int i = x; i < x + width; i++) {
             if (i < 1 || i >= this.width - 1) {
-                return false;
+                return true;
             }
         }
 
         for (int i = y; i < y + height; i++) {
             if (i < 1 || i >= this.height - 1) {
-                return false;
+                return true;
             }
 
         }
-        return true;
+        return false;
 
     }
 
