@@ -21,7 +21,11 @@ mvn javadoc:javadoc
 Sitä voi tarkastella avaamalla selaimella tiedoston target/site/apidocs
 
 ### Testaus
-tulee kohta
+Testit suoritetaan komennolla
+
+```
+mvn test
+```
 
 ## Viikkopalautukset
 
