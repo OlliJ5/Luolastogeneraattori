@@ -3,8 +3,7 @@
 Projekti tiralabra kurssille, syksy 2018
 
 ## Kuvaus
-Työn aihe on luoda luolastogeneraattori, joka luo erilaisia luolastoja peleille ja lisää pelien sisältöä antamalla
-mahdollisuuden luoda käytännössä loputtoman määrän erilaisia luolastoja.
+Työn aihe on luoda luolastogeneraattori, joka luo erilaisia ASCII-merkeistä koostuvia luolastoja peleille ja lisää pelien sisältöä antamalla mahdollisuuden luoda käytännössä loputtoman määrän erilaisia luolastoja. Pelissä #-merkit ovat seiniä, pisteet käytäviä ja tyhjät kohdat eli välilyönneistä koostuvat kohdat ovat huoneita.
 
 ## Komentorivikomennot
 
@@ -32,3 +31,7 @@ mvn test
 ### Viikko1
 * [Viikkoraportti 1](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti1.md)
 * [Määrittelydokumentti](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/m%C3%A4%C3%A4rittelydokumentti.md)
+
+
+### Viikko2
+* [Viikkoraportti 2](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti2.md)
