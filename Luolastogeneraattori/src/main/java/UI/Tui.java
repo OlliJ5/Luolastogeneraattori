@@ -20,7 +20,7 @@ public class Tui {
         int width = Integer.parseInt(this.scanner.nextLine());
         
         Dungeon dungeon  = new Dungeon(height, width);
-        dungeon.placeRooms();
+        dungeon.placeRooms(40);
         dungeon.print();
         
         
