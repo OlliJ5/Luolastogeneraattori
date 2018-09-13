@@ -80,21 +80,21 @@ public class Dungeon {
             return;
         }
 
-        if (dungeon[y][x].equals("-")) {
+        if (dungeon[y][x].equals(".")) {
             return;
         }
         if (!dungeon[y][x].equals("#")) {
             return;
         }
 
-        if (dungeon[y - 1][x - 1].equals(".")
-                || dungeon[y - 1][x].equals(".")
-                || dungeon[y - 1][x + 1].equals(".")
-                || dungeon[y][x - 1].equals(".")
-                || dungeon[y][x + 1].equals(".")
-                || dungeon[y + 1][x - 1].equals(".")
-                || dungeon[y + 1][x].equals(".")
-                || dungeon[y + 1][x + 1].equals(".")) {
+        if (dungeon[y - 1][x - 1].equals(" ")
+                || dungeon[y - 1][x].equals(" ")
+                || dungeon[y - 1][x + 1].equals(" ")
+                || dungeon[y][x - 1].equals(" ")
+                || dungeon[y][x + 1].equals(" ")
+                || dungeon[y + 1][x - 1].equals(" ")
+                || dungeon[y + 1][x].equals(" ")
+                || dungeon[y + 1][x + 1].equals(" ")) {
             return;
         }
 
@@ -127,7 +127,7 @@ public class Dungeon {
             }
         }
 
-        this.dungeon[y][x] = "-";
+        this.dungeon[y][x] = ".";
 
         this.floodFill(y - 1, x, "UP");
         this.floodFill(y, x - 1, "LEFT");
@@ -159,7 +159,7 @@ public class Dungeon {
         if (checkIfRoomIsValid(x, y, height, width)) {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    dungeon[y + i][x + j] = ".";
+                    dungeon[y + i][x + j] = " ";
                 }
             }
 
