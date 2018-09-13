@@ -42,8 +42,8 @@ public class Dungeon {
         int x = random.nextInt(this.width - 2) + 1;
         int y = random.nextInt(this.height - 2) + 1;
 
-        int height = random.nextInt(3) + 2;
-        int width = random.nextInt(3) + 2;
+        int height = random.nextInt(2) + 2;
+        int width = random.nextInt(4) + 2;
         
         if (checkIfRoomIsValid(x, y, height, width)) {
             for(int i = 0; i < height; i++) {
@@ -68,7 +68,13 @@ public class Dungeon {
     }
     
     public boolean roomOverlaps(int x, int y, int height, int width) {
-        
+        for(int i = -1; i <= height; i++) {
+            for(int j = -1; j <= width; j++) {
+                if(!dungeon[y + i][x + j].equals("#")) {
+                    return true;
+                }
+            }
+        }
         
         
         return false;
