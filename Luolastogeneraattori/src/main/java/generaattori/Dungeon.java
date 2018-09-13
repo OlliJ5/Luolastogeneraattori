@@ -32,6 +32,18 @@ public class Dungeon {
         }
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String[][] getDungeon() {
+        return dungeon;
+    }
+    
     /**
      * The method generates a dungeon with rooms and corridors
      *
