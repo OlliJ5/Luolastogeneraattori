@@ -28,10 +28,13 @@ mvn test
 
 ## Viikkopalautukset
 
-### Viikko1
+### Viikko 1
 * [Viikkoraportti 1](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti1.md)
 * [Määrittelydokumentti](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/m%C3%A4%C3%A4rittelydokumentti.md)
 
 
-### Viikko2
+### Viikko 2
 * [Viikkoraportti 2](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti2.md)
+
+### Viikko 3
+* [Viikkoraportti 3](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti3.md)
