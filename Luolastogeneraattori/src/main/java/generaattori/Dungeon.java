@@ -152,98 +152,19 @@ public class Dungeon {
      * @param amount amount of tries to place a room
      */
     public void placeRooms(int amount) {
-        for (int i = 0; i < amount; i++) {
-            this.placeRoom();
-        }
-    }
-
-    /**
-     * Places One room if it's in an acceptable spot
-     */
-    public void placeRoom() {
         Random random = new Random();
-        int x = random.nextInt(this.width - 2) + 1;
-        int y = random.nextInt(this.height - 2) + 1;
-
-        int height = random.nextInt(2) + 2;
-        int width = random.nextInt(4) + 2;
-
-        if (checkIfRoomIsValid(x, y, height, width)) {
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    dungeon[y + i][x + j] = " ";
-                }
-            }
-
+        
+        for (int i = 0; i < amount; i++) {
+            int x = random.nextInt(this.width - 2) + 1;
+            int y = random.nextInt(this.height - 2) + 1;
+            
+            int height = random.nextInt(2) + 2;
+            int width = random.nextInt(4) + 2;
+                    
+            Room room = new Room(x, y, width, height);
+            
+            room.placeRoom(this.dungeon);
         }
-
-    }
-
-    /**
-     * Checks if a certain room is an acceptable spot
-     * 
-     * @param x the x-value of the upper left corner of the room
-     * @param y the y-value of the upper left corner of the room
-     * @param height the height of the room
-     * @param width the width of the room
-     * @return true, if the room is in an acceptable spot, else false
-     */
-    public boolean checkIfRoomIsValid(int x, int y, int height, int width) {
-        if (isRoomOutOfBounds(x, y, height, width)) {
-            return false;
-        } else if (roomOverlaps(x, y, height, width)) {
-            return false;
-        }
-
-        return true;
-
-    }
-
-    /**
-     * Checks if a certain room would go on top of some other room or would 
-     * be too close to some other room
-     * @param x the x-value of the upper left corner of the room
-     * @param y the y-value of the upper left corner of the room
-     * @param height the height of the room
-     * @param width the width of the room
-     * @return true, if the room is either on top of an already existing room or 
-     * too close to one. Else returns false
-     */
-    public boolean roomOverlaps(int x, int y, int height, int width) {
-        for (int i = -1; i <= height; i++) {
-            for (int j = -1; j <= width; j++) {
-                if (!dungeon[y + i][x + j].equals("#")) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     *
-     * @param x the x-value of the upper left corner of the room
-     * @param y the y-value of the upper left corner of the room
-     * @param height the height of the room
-     * @param width the width of the room
-     * @return returns true, if some part of the room is outside of the dungeon.
-     */
-    public boolean isRoomOutOfBounds(int x, int y, int height, int width) {
-        for (int i = x; i < x + width; i++) {
-            if (i < 1 || i >= this.width - 1) {
-                return true;
-            }
-        }
-
-        for (int i = y; i < y + height; i++) {
-            if (i < 1 || i >= this.height - 1) {
-                return true;
-            }
-
-        }
-        return false;
-
     }
 
 }
