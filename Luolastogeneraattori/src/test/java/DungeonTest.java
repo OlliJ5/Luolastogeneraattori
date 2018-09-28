@@ -1,5 +1,5 @@
 
-import generaattori.Dungeon;
+import generaattori.Dungeongenerator;
 import generaattori.Room;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,11 +7,11 @@ import org.junit.Test;
 
 public class DungeonTest {
 
-    Dungeon dungeon;
+    Dungeongenerator dungeon;
 
     @Before
     public void setUp() {
-        dungeon = new Dungeon(15, 60);
+        dungeon = new Dungeongenerator(15, 60);
     }
 
     @Test

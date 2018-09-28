@@ -7,11 +7,12 @@ import java.util.Random;
  *
  * @author ogrousu
  */
-public class Dungeon {
+public class Dungeongenerator {
 
     private int height;
     private int width;
     private String[][] dungeon;
+    private int region;
 
     /**
      *
@@ -20,10 +21,11 @@ public class Dungeon {
      * @param height the desired height of the dungeon
      * @param width the desired width of the dungeon
      */
-    public Dungeon(int height, int width) {
+    public Dungeongenerator(int height, int width) {
         this.height = height;
         this.width = width;
         this.dungeon = new String[this.height][this.width];
+        this.region = 1;
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -43,7 +45,7 @@ public class Dungeon {
     public String[][] getDungeon() {
         return dungeon;
     }
-    
+
     /**
      * The method generates a dungeon with rooms and corridors
      *
@@ -51,7 +53,7 @@ public class Dungeon {
      */
     public void generate(int amountOfRooms) {
         this.placeRooms(amountOfRooms);
-        this.placeCorridors();
+        //this.placeCorridors();
     }
 
     /**
@@ -79,10 +81,10 @@ public class Dungeon {
     }
 
     /**
-     * Recursive method that checks if a certain point can be a part 
-     * of a corridor in the dungeon. Calls itself to check if the surrounding 
-     * points are acceptable spots as well
-     * 
+     * Recursive method that checks if a certain point can be a part of a
+     * corridor in the dungeon. Calls itself to check if the surrounding points
+     * are acceptable spots as well
+     *
      * @param y the y-value of the spot in the dungeon we are checking
      * @param x the x-value of the spot in the dungeon we are checking
      * @param direction the direction in which the corridor is moving
@@ -149,22 +151,26 @@ public class Dungeon {
 
     /**
      * Places rooms in the dungeon
+     *
      * @param amount amount of tries to place a room
      */
     public void placeRooms(int amount) {
         Random random = new Random();
-        
+
         for (int i = 0; i < amount; i++) {
             int x = random.nextInt(this.width - 2) + 1;
             int y = random.nextInt(this.height - 2) + 1;
-            
+
             int height = random.nextInt(2) + 2;
             int width = random.nextInt(4) + 2;
-                    
+
             Room room = new Room(x, y, width, height);
+
+            if(room.placeRoom(dungeon, region) != 0) {
+                region++;
+            }
             
-            room.placeRoom(this.dungeon);
         }
     }
-
+    
 }

@@ -1,6 +1,7 @@
 
 package generaattori;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -19,22 +20,42 @@ public class Room {
         this.width = width;
         this.height = height;
     }
-    
-    
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    
+    
+    
     /**
      * Places a room if it's in an acceptable spot
      * @param dungeon the dungeon where you want to place the room
      */
-    public void placeRoom(String[][] dungeon) {
+    public int placeRoom(String[][] dungeon, int region) {
         if (checkIfRoomIsValid(dungeon)) {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    dungeon[y + i][x + j] = " ";
+                    dungeon[y + i][x + j] = Integer.toString(region);
                 }
             }
-
+            return region++;
+            
         }
+        
+        return 0;
 
     }
 
@@ -96,4 +117,11 @@ public class Room {
         return false;
 
     }
+
+    @Override
+    public String toString() {
+        return "x: " + this.x + "\ny: " + this.y + "\nwidth and height: " + this.width + "x" + this.height;
+    }
+    
+    
 }

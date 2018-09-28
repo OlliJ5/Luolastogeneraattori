@@ -1,7 +1,7 @@
 
 package UI;
 
-import generaattori.Dungeon;
+import generaattori.Dungeongenerator;
 import java.util.Scanner;
 
 
@@ -19,7 +19,7 @@ public class Tui {
         System.out.print("Please enter the desired width of the maze: ");
         int width = Integer.parseInt(this.scanner.nextLine());
         
-        Dungeon dungeon  = new Dungeon(height, width);
+        Dungeongenerator dungeon  = new Dungeongenerator(height, width);
         dungeon.placeRooms(40);
         dungeon.print();
         
