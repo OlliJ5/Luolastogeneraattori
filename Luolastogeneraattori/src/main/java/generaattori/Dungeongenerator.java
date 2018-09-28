@@ -16,7 +16,7 @@ public class Dungeongenerator {
 
     /**
      *
-     * create a dungeon of some size
+     * create a dungeon generator that creates a dungeon of some size
      *
      * @param height the desired height of the dungeon
      * @param width the desired width of the dungeon
@@ -34,14 +34,26 @@ public class Dungeongenerator {
         }
     }
 
+    /**
+     *
+     * @return height of the dungeon
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     *
+     * @return width of the dungeon
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     *
+     * @return the dungeon as a two dimensional array
+     */
     public String[][] getDungeon() {
         return dungeon;
     }
@@ -147,6 +159,23 @@ public class Dungeongenerator {
         this.floodFill(y, x - 1, "LEFT");
         this.floodFill(y, x + 1, "RIGHT");
         this.floodFill(y + 1, x, "DOWN");
+    }
+    
+    /**
+     * checks if a corridor can be placed in this position
+     * @param x x-value of the corridor
+     * @param y y-value of the corridor
+     * @return true, if a corridor can be placed, else false
+     */
+    public boolean checkIfPlaceIsValidForCorridor(int x, int y) {
+        if(dungeon[y][x] != "#"
+                || dungeon[y - 1][x - 1] != "#" 
+                || dungeon[y - 1][x + 1] != "#"
+                || dungeon[y + 1][x - 1] != "#"
+                || dungeon[y + 1][x + 1] != "#"){
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -14,6 +14,13 @@ public class Room {
     private int width;
     private int height;
 
+    /**
+     * creates a Room
+     * @param x x-value of the upper left corner of the room
+     * @param y y-value of the upper left corner of the room
+     * @param width the width of the room
+     * @param height the height of the room
+     */
     public Room(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -21,18 +28,34 @@ public class Room {
         this.height = height;
     }
 
+    /**
+     *
+     * @return x-value of the upper left corner of the room
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return y-value of the upper left corner of the room
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @return width of the room
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     *
+     * @return height of the room
+     */
     public int getHeight() {
         return height;
     }
@@ -43,6 +66,9 @@ public class Room {
     /**
      * Places a room if it's in an acceptable spot
      * @param dungeon the dungeon where you want to place the room
+     * @param region
+     * @return returns 0 if the room wasn't placed. the value of the next "region"
+     *  otherwise
      */
     public int placeRoom(String[][] dungeon, int region) {
         if (checkIfRoomIsValid(dungeon)) {
@@ -60,7 +86,7 @@ public class Room {
     }
 
     /**
-     * Checks if a certain room is an acceptable spot
+     * Checks if a certain room is in an acceptable spot
      *
      * @param dungeon the dungeon you want to see if the room fits in
      * @return true, if the room is in an acceptable spot, else false
