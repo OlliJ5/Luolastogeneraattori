@@ -225,6 +225,9 @@ public class Dungeongenerator {
         }
     }
 
+    /**
+     * methods prints connectors, used for debugging
+     */
     public void printConnectors() {
         ArrayList<Connector> connectors = findConnectors();
 
@@ -233,6 +236,9 @@ public class Dungeongenerator {
         }
     }
 
+    /**
+     * Method connects the different regions(rooms and corridors) in the dungeon
+     */
     public void connectDungeon() {
         ArrayList<Connector> connectors = findConnectors();
 
@@ -250,6 +256,11 @@ public class Dungeongenerator {
 
     }
 
+    /**
+     * Method finds all possible connectors that can connect two different regions
+     * in the dungeon
+     * @return List of Connector-objects
+     */
     public ArrayList findConnectors() {
         ArrayList<Connector> connectors = new ArrayList<>();
         for (int y = 1; y < this.height - 2; y++) {
@@ -263,6 +274,12 @@ public class Dungeongenerator {
         return connectors;
     }
 
+    /**
+     * Method checks if a certain point in the dungeon can be a connector
+     * @param x x-value of the spot we are checking
+     * @param y y-value of the spot we are checking
+     * @return true, if given point can be a connector. Otherwise false
+     */
     public boolean isConnector(int x, int y) {
         if (!dungeon[y][x].equals("#")) {
             return false;
@@ -311,6 +328,12 @@ public class Dungeongenerator {
 
     }
 
+    /**
+     * Method checks which two regions a connector can connect together
+     * @param x x-value of the connector
+     * @param y y-value of the connector
+     * @return an array with two values which refer to the connectable regions
+     */
     public int[] connectsRegions(int x, int y) {
         int[] regions = new int[2];
 
@@ -352,6 +375,9 @@ public class Dungeongenerator {
         return regions;
     }
 
+    /**
+     * Makes the dungeon pretty and gets rid of the integers in it
+     */
     public void makeItPretty() {
         for (int y = 1; y < this.height - 1; y++) {
             for (int x = 1; x < this.width - 1; x++) {

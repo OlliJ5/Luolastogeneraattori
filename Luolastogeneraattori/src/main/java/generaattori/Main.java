@@ -12,11 +12,8 @@ public class Main {
         Dungeongenerator dungeon = new Dungeongenerator(15, 60);
         
         dungeon.generate(20);
-        //dungeon.createPassageways();
-        
-        //dungeon.printRooms();
-        
         dungeon.print();
+
 //        Scanner scanner = new Scanner(System.in);
 //        Tui tui = new Tui(scanner);
 //        tui.start();

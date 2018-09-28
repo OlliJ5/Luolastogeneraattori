@@ -21,6 +21,7 @@ public class Room {
      * @param y y-value of the upper left corner of the room
      * @param width the width of the room
      * @param height the height of the room
+     * @param region region number of the room
      */
     public Room(int x, int y, int width, int height, int region) {
         this.x = x;
@@ -68,7 +69,7 @@ public class Room {
     /**
      * Places a room if it's in an acceptable spot
      * @param dungeon the dungeon where you want to place the room
-     * @param region
+     * @param region region number that is used for the room
      * @return returns 0 if the room wasn't placed. the value of the "region"
      *  otherwise
      */
@@ -125,7 +126,7 @@ public class Room {
     }
 
     /**
-     *
+     * Checks if a room is out of bounds
      * @param dungeon the dungeon which we want to check
      * @return returns true, if some part of the room is outside of the dungeon.
      */
