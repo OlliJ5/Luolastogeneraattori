@@ -26,6 +26,11 @@ Testit suoritetaan komennolla
 mvn test
 ```
 
+## Dokumentaatio
+* [Määrittelydokumentti](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/m%C3%A4%C3%A4rittelydokumentti.md)
+* [Testaus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/testausdokumentti.md)
+* [Toteutus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/toteutusdokumentti.md)
+
 ## Viikkopalautukset
 
 ### Viikko 1
@@ -38,3 +43,8 @@ mvn test
 
 ### Viikko 3
 * [Viikkoraportti 3](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti3.md)
+
+### Viikko 4
+* [Viikkoraportti 4](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti4.md)
+* [Testaus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/testausdokumentti.md)
+* [Toteutus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/toteutusdokumentti.md)
