@@ -26,34 +26,35 @@ public class DungeonTest {
 
     @Test
     public void isRoomOutOfBoundsReturnsTrueWhenRoomIsOutOfBounds() {
-        Room room = new Room(14, 14, 4, 4);
+        Room room = new Room(14, 14, 4, 4, 1);
         Assert.assertEquals(true, room.isRoomOutOfBounds(dungeon.getDungeon()));
     }
     
     @Test
     public void isRoomOutOfBoundsReturnsFalseWhenRoomInsideTheDungeon() {
-        Room room = new Room(33, 10, 4, 4);
+        Room room = new Room(33, 10, 4, 4, 1);
         Assert.assertEquals(false, room.isRoomOutOfBounds(dungeon.getDungeon()));
     }
     
     @Test
     public void whenRoomOverlapsMethodReturnsTrue() {
         dungeon.getDungeon()[11][42] = " ";
-        Room room = new Room(40, 10, 4, 4);
+        Room room = new Room(40, 10, 4, 4, 1);
         Assert.assertEquals(true, room.roomOverlaps(dungeon.getDungeon()));
     }
     
     @Test
     public void whenRoomDoesNotOverlapMethodReturnsFalse() {
-        Room room = new Room(40, 10, 4, 4);
+        Room room = new Room(40, 10, 4, 4, 1);
         Assert.assertEquals(false, room.roomOverlaps(this.dungeon.getDungeon()));
     }
     
     @Test
     public void whenRoomIsValidMethodReturnsTrue() {
-        Room room = new Room(40, 7, 2, 2);
+        Room room = new Room(40, 7, 2, 2, 1);
         Assert.assertEquals(true, room.checkIfRoomIsValid(this.dungeon.getDungeon()));
     }
+    
     
     
 }

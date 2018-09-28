@@ -1,6 +1,7 @@
 package generaattori;
 
-import static java.lang.Math.random;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -13,6 +14,7 @@ public class Dungeongenerator {
     private int width;
     private String[][] dungeon;
     private int region;
+    private ArrayList<Room> rooms;
 
     /**
      *
@@ -26,6 +28,7 @@ public class Dungeongenerator {
         this.width = width;
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
+        this.rooms = new ArrayList<>();
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -65,7 +68,7 @@ public class Dungeongenerator {
      */
     public void generate(int amountOfRooms) {
         this.placeRooms(amountOfRooms);
-        //this.placeCorridors();
+        this.placeCorridors();
     }
 
     /**
@@ -85,9 +88,12 @@ public class Dungeongenerator {
      * The method places Corridors in the dungeon
      */
     public void placeCorridors() {
-        for (int y = 1; y < this.height; y += 2) {
-            for (int x = 1; x < this.width; x += 2) {
-                this.floodFill(y, x, "dunno");
+        for (int y = 1; y < this.height - 1; y += 2) {
+            for (int x = 1; x < this.width - 1; x += 2) {
+                if (checkIfPlaceIsValidForCorridor(x, y)) {
+                    this.floodFill(y, x, "dunno");
+                    region++;
+                }
             }
         }
     }
@@ -113,39 +119,44 @@ public class Dungeongenerator {
             return;
         }
 
-        if (dungeon[y - 1][x - 1].equals(" ")
-                || dungeon[y - 1][x].equals(" ")
-                || dungeon[y - 1][x + 1].equals(" ")
-                || dungeon[y][x - 1].equals(" ")
-                || dungeon[y][x + 1].equals(" ")
-                || dungeon[y + 1][x - 1].equals(" ")
-                || dungeon[y + 1][x].equals(" ")
-                || dungeon[y + 1][x + 1].equals(" ")) {
+        if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= rooms.size()
+                || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= rooms.size()
+                || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= rooms.size()
+                || isInteger(dungeon[y][x - 1]) && Integer.parseInt(dungeon[y][x - 1]) <= rooms.size()
+                || isInteger(dungeon[y][x + 1]) && Integer.parseInt(dungeon[y][x + 1]) <= rooms.size()
+                || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= rooms.size()
+                || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= rooms.size()
+                || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= rooms.size()) {
+
             return;
         }
 
-        if (direction.equals("UP")) {
+        if (direction.equals(
+                "UP")) {
             if (!dungeon[y - 1][x].equals("#")
                     || !dungeon[y][x - 1].equals("#")
                     || !dungeon[y][x + 1].equals("#")) {
                 return;
             }
 
-        } else if (direction.equals("LEFT")) {
+        } else if (direction.equals(
+                "LEFT")) {
             if (!dungeon[y - 1][x].equals("#")
                     || !dungeon[y][x - 1].equals("#")
                     || !dungeon[y + 1][x].equals("#")) {
                 return;
             }
 
-        } else if (direction.equals("RIGHT")) {
+        } else if (direction.equals(
+                "RIGHT")) {
             if (!dungeon[y - 1][x].equals("#")
                     || !dungeon[y + 1][x].equals("#")
                     || !dungeon[y][x + 1].equals("#")) {
                 return;
             }
 
-        } else if (direction.equals("DOWN")) {
+        } else if (direction.equals(
+                "DOWN")) {
             if (!dungeon[y][x - 1].equals("#")
                     || !dungeon[y][x + 1].equals("#")
                     || !dungeon[y + 1][x].equals("#")) {
@@ -153,26 +164,34 @@ public class Dungeongenerator {
             }
         }
 
-        this.dungeon[y][x] = ".";
+        this.dungeon[y][x] = Integer.toString(region);
 
-        this.floodFill(y - 1, x, "UP");
-        this.floodFill(y, x - 1, "LEFT");
-        this.floodFill(y, x + 1, "RIGHT");
-        this.floodFill(y + 1, x, "DOWN");
+        this.floodFill(y
+                - 1, x, "UP");
+
+        this.floodFill(y, x
+                - 1, "LEFT");
+
+        this.floodFill(y, x
+                + 1, "RIGHT");
+
+        this.floodFill(y
+                + 1, x, "DOWN");
     }
-    
+
     /**
      * checks if a corridor can be placed in this position
+     *
      * @param x x-value of the corridor
      * @param y y-value of the corridor
      * @return true, if a corridor can be placed, else false
      */
     public boolean checkIfPlaceIsValidForCorridor(int x, int y) {
-        if(dungeon[y][x] != "#"
-                || dungeon[y - 1][x - 1] != "#" 
-                || dungeon[y - 1][x + 1] != "#"
-                || dungeon[y + 1][x - 1] != "#"
-                || dungeon[y + 1][x + 1] != "#"){
+        if (!dungeon[y][x].equals("#")
+                || !dungeon[y - 1][x - 1].equals("#")
+                || !dungeon[y - 1][x + 1].equals("#")
+                || !dungeon[y + 1][x - 1].equals("#")
+                || !dungeon[y + 1][x + 1].equals("#")) {
             return false;
         }
         return true;
@@ -193,13 +212,133 @@ public class Dungeongenerator {
             int height = random.nextInt(2) + 2;
             int width = random.nextInt(4) + 2;
 
-            Room room = new Room(x, y, width, height);
+            Room room = new Room(x, y, width, height, region);
 
-            if(room.placeRoom(dungeon, region) != 0) {
+            if (room.placeRoom(dungeon, region) != 0) {
+                rooms.add(room);
                 region++;
             }
-            
+
         }
     }
-    
+
+    public void printConnectors() {
+        ArrayList<Connector> connectors = findConnectors();
+
+        for (int i = 0; i < connectors.size(); i++) {
+            System.out.println(connectors.get(i).toString());
+        }
+    }
+
+    public ArrayList findConnectors() {
+        ArrayList<Connector> connectors = new ArrayList<>();
+        for (int y = 1; y < this.height - 2; y++) {
+            for (int x = 1; x < this.width - 2; x++) {
+                if (isConnector(x, y)) {
+                    int[] regions = connectsRegions(x, y);
+                    connectors.add(new Connector(x, y, regions[0], regions[1]));
+                }
+            }
+        }
+        return connectors;
+    }
+
+    public boolean isConnector(int x, int y) {
+        if (!dungeon[y][x].equals("#")) {
+            return false;
+        }
+
+        int differentRegions = 0;
+        String region1 = "";
+
+        if (!dungeon[y - 1][x].equals("#")) {
+            differentRegions++;
+            region1 = dungeon[y - 1][x];
+        }
+
+        if (!dungeon[y][x + 1].equals("#")) {
+            if (region1.equals("")) {
+                differentRegions++;
+                region1 = dungeon[y][x + 1];
+            } else {
+                if (!region1.equals(dungeon[y][x + 1])) {
+                    differentRegions++;
+                }
+            }
+        }
+        if (!dungeon[y + 1][x].equals("#")) {
+            if (region1.equals("")) {
+                differentRegions++;
+                region1 = dungeon[y + 1][x];
+            } else {
+                if (!region1.equals(dungeon[y + 1][x])) {
+                    differentRegions++;
+                }
+            }
+        }
+        if (!dungeon[y][x - 1].equals("#")) {
+            if (region1.equals("")) {
+                differentRegions++;
+                region1 = dungeon[y][x - 1];
+            } else {
+                if (!region1.equals(dungeon[y][x - 1])) {
+                    differentRegions++;
+                }
+            }
+        }
+
+        return differentRegions >= 2;
+
+    }
+
+    public int[] connectsRegions(int x, int y) {
+        int[] regions = new int[2];
+
+        if (!dungeon[y - 1][x].equals("#")) {
+            regions[0] = Integer.parseInt(dungeon[y - 1][x]);
+        }
+
+        if (!dungeon[y][x + 1].equals("#")) {
+            if (regions[0] == 0) {
+                regions[0] = Integer.parseInt(dungeon[y][x + 1]);
+            } else {
+                if (regions[0] != Integer.parseInt(dungeon[y][x + 1])) {
+                    regions[1] = Integer.parseInt(dungeon[y][x + 1]);
+                }
+            }
+        }
+
+        if (!dungeon[y + 1][x].equals("#")) {
+            if (regions[0] == 0) {
+                regions[0] = Integer.parseInt(dungeon[y + 1][x]);
+            } else {
+                if (regions[0] != Integer.parseInt(dungeon[y + 1][x])) {
+                    regions[1] = Integer.parseInt(dungeon[y + 1][x]);
+                }
+
+            }
+        }
+
+        if (!dungeon[y][x - 1].equals("#")) {
+            if (regions[0] == 0) {
+                regions[0] = Integer.parseInt(dungeon[y][x - 1]);
+            } else {
+                if (regions[0] != Integer.parseInt(dungeon[y][x - 1])) {
+                    regions[1] = Integer.parseInt(dungeon[y][x - 1]);
+                }
+            }
+        }
+
+        return regions;
+    }
+
+    private boolean isInteger(String possibleNumber) {
+        try {
+            Integer.parseInt(possibleNumber);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -13,6 +13,7 @@ public class Room {
     private int y;
     private int width;
     private int height;
+    private int regionNumber;
 
     /**
      * creates a Room
@@ -21,11 +22,12 @@ public class Room {
      * @param width the width of the room
      * @param height the height of the room
      */
-    public Room(int x, int y, int width, int height) {
+    public Room(int x, int y, int width, int height, int region) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.regionNumber = region;
     }
 
     /**
@@ -67,7 +69,7 @@ public class Room {
      * Places a room if it's in an acceptable spot
      * @param dungeon the dungeon where you want to place the room
      * @param region
-     * @return returns 0 if the room wasn't placed. the value of the next "region"
+     * @return returns 0 if the room wasn't placed. the value of the "region"
      *  otherwise
      */
     public int placeRoom(String[][] dungeon, int region) {
@@ -77,7 +79,7 @@ public class Room {
                     dungeon[y + i][x + j] = Integer.toString(region);
                 }
             }
-            return region++;
+            return region;
             
         }
         
