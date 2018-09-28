@@ -18,6 +18,24 @@ public class Connector {
         this.region2 = region2;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getRegion1() {
+        return region1;
+    }
+
+    public int getRegion2() {
+        return region2;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "\nx: " + x + " y: " + y + "    - connects " + region1 + " and " + region2;

@@ -1,5 +1,6 @@
 package generaattori;
 
+import tietorakenteet.Unionfind;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -69,6 +70,8 @@ public class Dungeongenerator {
     public void generate(int amountOfRooms) {
         this.placeRooms(amountOfRooms);
         this.placeCorridors();
+        this.connectDungeon();
+        this.makeItPretty();
     }
 
     /**
@@ -230,6 +233,23 @@ public class Dungeongenerator {
         }
     }
 
+    public void connectDungeon() {
+        ArrayList<Connector> connectors = findConnectors();
+
+        Unionfind u = new Unionfind(connectors.size());
+
+        for (int i = 0; i < connectors.size(); i++) {
+            if (!u.unified(connectors.get(i).getRegion1(), connectors.get(i).getRegion2())) {
+                u.unify(connectors.get(i).getRegion1(), connectors.get(i).getRegion2());
+                int y = connectors.get(i).getY();
+                int x = connectors.get(i).getX();
+
+                dungeon[y][x] = "/";
+            }
+        }
+
+    }
+
     public ArrayList findConnectors() {
         ArrayList<Connector> connectors = new ArrayList<>();
         for (int y = 1; y < this.height - 2; y++) {
@@ -330,6 +350,20 @@ public class Dungeongenerator {
         }
 
         return regions;
+    }
+
+    public void makeItPretty() {
+        for (int y = 1; y < this.height - 1; y++) {
+            for (int x = 1; x < this.width - 1; x++) {
+                if (isInteger(dungeon[y][x])) {
+                    if (Integer.parseInt(dungeon[y][x]) <= rooms.size()) {
+                        dungeon[y][x] = " ";
+                    } else {
+                        dungeon[y][x] = ".";
+                    }
+                }
+            }
+        }
     }
 
     private boolean isInteger(String possibleNumber) {
