@@ -1,21 +1,21 @@
 package generaattori;
 
-import tietorakenteet.Unionfind;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
+import tietorakenteet.RoomList;
+import tietorakenteet.Unionfind;
 
 /**
  *
  * @author ogrousu
  */
-public class Dungeongenerator {
+public class Dungeongenerator{
 
     private int height;
     private int width;
     private String[][] dungeon;
     private int region;
-    private ArrayList<Room> rooms;
+    private RoomList rooms;
 
     /**
      *
@@ -29,7 +29,7 @@ public class Dungeongenerator {
         this.width = width;
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
-        this.rooms = new ArrayList<>();
+        this.rooms = new RoomList();
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -229,7 +229,7 @@ public class Dungeongenerator {
      * methods prints connectors, used for debugging
      */
     public void printConnectors() {
-        ArrayList<Connector> connectors = findConnectors();
+        ArrayList connectors = findConnectors();
 
         for (int i = 0; i < connectors.size(); i++) {
             System.out.println(connectors.get(i).toString());

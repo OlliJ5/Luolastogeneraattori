@@ -9,9 +9,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Dungeongenerator dungeon = new Dungeongenerator(15, 60);
+        Dungeongenerator dungeon = new Dungeongenerator(30, 100);
         
-        dungeon.generate(20);
+        dungeon.generate(70);
         dungeon.print();
 
 //        Scanner scanner = new Scanner(System.in);

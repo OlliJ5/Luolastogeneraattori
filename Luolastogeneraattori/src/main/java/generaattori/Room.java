@@ -1,8 +1,6 @@
 
 package generaattori;
 
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
