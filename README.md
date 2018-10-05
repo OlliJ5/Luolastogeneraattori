@@ -48,3 +48,6 @@ mvn test
 * [Viikkoraportti 4](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti4.md)
 * [Testaus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/testausdokumentti.md)
 * [Toteutus](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/toteutusdokumentti.md)
+
+### Viikko 5
+* [Viikkoraportti 5](https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/viikkoraportti5.md)
