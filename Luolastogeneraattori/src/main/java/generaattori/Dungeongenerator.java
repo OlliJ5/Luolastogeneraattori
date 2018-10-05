@@ -9,7 +9,7 @@ import tietorakenteet.Unionfind;
  *
  * @author ogrousu
  */
-public class Dungeongenerator{
+public class Dungeongenerator {
 
     private int height;
     private int width;
@@ -93,7 +93,7 @@ public class Dungeongenerator{
     public void placeCorridors() {
         for (int y = 1; y < this.height - 1; y += 2) {
             for (int x = 1; x < this.width - 1; x += 2) {
-                if (checkIfPlaceIsValidForCorridor(x, y)) {
+                if (checkIfPlaceIsValidForStartingACorridor(x, y)) {
                     this.floodFill(y, x, "dunno");
                     region++;
                 }
@@ -189,7 +189,7 @@ public class Dungeongenerator{
      * @param y y-value of the corridor
      * @return true, if a corridor can be placed, else false
      */
-    public boolean checkIfPlaceIsValidForCorridor(int x, int y) {
+    public boolean checkIfPlaceIsValidForStartingACorridor(int x, int y) {
         if (!dungeon[y][x].equals("#")
                 || !dungeon[y - 1][x - 1].equals("#")
                 || !dungeon[y - 1][x + 1].equals("#")
@@ -213,7 +213,7 @@ public class Dungeongenerator{
             int y = random.nextInt(this.height - 2) + 1;
 
             int height = random.nextInt(2) + 2;
-            int width = random.nextInt(4) + 2;
+            int width = random.nextInt(7) + 2;
 
             Room room = new Room(x, y, width, height, region);
 
@@ -257,8 +257,9 @@ public class Dungeongenerator{
     }
 
     /**
-     * Method finds all possible connectors that can connect two different regions
-     * in the dungeon
+     * Method finds all possible connectors that can connect two different
+     * regions in the dungeon
+     *
      * @return List of Connector-objects
      */
     public ArrayList findConnectors() {
@@ -276,6 +277,7 @@ public class Dungeongenerator{
 
     /**
      * Method checks if a certain point in the dungeon can be a connector
+     *
      * @param x x-value of the spot we are checking
      * @param y y-value of the spot we are checking
      * @return true, if given point can be a connector. Otherwise false
@@ -330,6 +332,7 @@ public class Dungeongenerator{
 
     /**
      * Method checks which two regions a connector can connect together
+     *
      * @param x x-value of the connector
      * @param y y-value of the connector
      * @return an array with two values which refer to the connectable regions
