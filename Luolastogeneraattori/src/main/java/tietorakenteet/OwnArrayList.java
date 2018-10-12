@@ -44,4 +44,13 @@ public class OwnArrayList<E> {
         return this.list[i];
     }
     
+    public boolean contains(E e) {
+        for(int i = 0; i < this.size; i++) {
+            if(this.list[i].equals(e)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

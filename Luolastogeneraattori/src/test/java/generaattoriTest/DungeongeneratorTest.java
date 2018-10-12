@@ -1,4 +1,4 @@
-package Dungeongenerator;
+package generaattoriTest;
 
 import generaattori.Dungeongenerator;
 import org.junit.Before;

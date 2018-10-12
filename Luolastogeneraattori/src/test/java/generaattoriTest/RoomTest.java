@@ -1,3 +1,5 @@
+package generaattoriTest;
+
 
 import generaattori.Dungeongenerator;
 import generaattori.Room;

@@ -1,3 +1,5 @@
+package generaattoriTest;
+
 
 import generaattori.Connector;
 import org.junit.Before;
