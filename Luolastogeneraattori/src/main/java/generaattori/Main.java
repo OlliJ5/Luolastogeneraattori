@@ -1,23 +1,21 @@
 
 package generaattori;
 
-import UI.Tui;
-import java.util.Scanner;
-import tietorakenteet.OwnArrayList;
+import performance.PerformanceTester;
 
 
 public class Main {
 
 
     public static void main(String[] args) {
-//        Dungeongenerator dungeon = new Dungeongenerator(15, 60);
+//        Dungeongenerator dungeon = new Dungeongenerator(80, 240);
 //        
-//        dungeon.generate(50);
+//        dungeon.generate(600);
 //        dungeon.print();
+        PerformanceTester tester = new PerformanceTester();
+        tester.testPerformance();
           
-//        Scanner scanner = new Scanner(System.in);
-//        Tui tui = new Tui(scanner);
-//        tui.start();
+
     }
     
 }
