@@ -22,6 +22,7 @@ public class PerformanceTester {
     
     
     public void smallDungeonTest() {
+        long mean = 0;
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
 
@@ -31,13 +32,16 @@ public class PerformanceTester {
             long finishTime = System.currentTimeMillis();
 
             long totalTime = finishTime - startingTime;
+            mean += totalTime;
 
             System.out.println("Operaatioon kului: " + totalTime + " ms");
         }
-        System.out.println("");
+
+        System.out.println("Keskiarvo " + (mean /= 10) + " ms\n");
     }
     
     public void mediumDungeonTest() {
+        long mean = 0;
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
             
@@ -47,25 +51,30 @@ public class PerformanceTester {
             long finishTime = System.currentTimeMillis();
             
             long totalTime = finishTime - startingTime;
+            mean += totalTime;
             
             System.out.println("Operaatioon kului: " + totalTime + " ms" );
         }
-        System.out.println("");
+        
+        System.out.println("Keskiarvo " + (mean /= 10) + " ms\n");
     }
     
     public void bigDungeon() {
+        long mean = 0;
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
             
             Dungeongenerator dungeon = new Dungeongenerator(80, 240);
-            dungeon.generate(500);
+            dungeon.generate(2000);
             
             long finishTime = System.currentTimeMillis();
             
             long totalTime = finishTime - startingTime;
+            mean += totalTime;
             
             System.out.println("Operaatioon kului: " + totalTime + " ms");
         }
-        System.out.println("");
+        
+        System.out.println("Keskiarvo " + (mean /=10 ) + " ms\n");
     }
 }

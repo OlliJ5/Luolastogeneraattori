@@ -13,7 +13,7 @@ public class Main {
 //        dungeon.generate(600);
 //        dungeon.print();
         PerformanceTester tester = new PerformanceTester();
-        tester.testPerformance();
+        tester.bigDungeon();
           
 
     }
