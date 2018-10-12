@@ -1,24 +1,23 @@
 
 package tietorakenteet;
 
-import generaattori.Room;
 
 
-public class RoomList {
-    private Room[] list;
+public class OwnArrayList<E> {
+    private E[] list;
     private int size;
     
-    public RoomList() {
-        this.list = new Room[10];
+    public OwnArrayList() {
+        this.list = (E[])new Object[10];
         this.size = 0;
     }
     
-    public void add(Room room) {
+    public void add(E e) {
         if(this.size == list.length) {
             createBiggerList();
         }
         
-        this.list[this.size] = room;
+        this.list[this.size] = e;
         this.size++;
         
     }
@@ -27,7 +26,7 @@ public class RoomList {
         double newSizeAsDouble = this.list.length * 1.5;
         int newSize = (int) newSizeAsDouble;
         
-        Room[] newList = new Room[newSize];
+        E[] newList = (E[])new Object[newSize];
         
         for(int i = 0; i < this.list.length; i++) {
             newList[i] = this.list[i];
@@ -41,7 +40,7 @@ public class RoomList {
         return this.size;
     }
     
-    public Object get(int i) {
+    public E get(int i) {
         return this.list[i];
     }
     

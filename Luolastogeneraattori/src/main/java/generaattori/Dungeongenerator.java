@@ -1,8 +1,7 @@
 package generaattori;
 
-import java.util.ArrayList;
 import java.util.Random;
-import tietorakenteet.RoomList;
+import tietorakenteet.OwnArrayList;
 import tietorakenteet.Unionfind;
 
 /**
@@ -15,7 +14,7 @@ public class Dungeongenerator {
     private int width;
     private String[][] dungeon;
     private int region;
-    private RoomList rooms;
+    private OwnArrayList<Room> rooms;
 
     /**
      *
@@ -29,7 +28,7 @@ public class Dungeongenerator {
         this.width = width;
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
-        this.rooms = new RoomList();
+        this.rooms = new OwnArrayList();
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -229,7 +228,7 @@ public class Dungeongenerator {
      * methods prints connectors, used for debugging
      */
     public void printConnectors() {
-        ArrayList connectors = findConnectors();
+        OwnArrayList connectors = findConnectors();
 
         for (int i = 0; i < connectors.size(); i++) {
             System.out.println(connectors.get(i).toString());
@@ -240,7 +239,7 @@ public class Dungeongenerator {
      * Method connects the different regions(rooms and corridors) in the dungeon
      */
     public void connectDungeon() {
-        ArrayList<Connector> connectors = findConnectors();
+        OwnArrayList<Connector> connectors = findConnectors();
 
         Unionfind u = new Unionfind(connectors.size());
 
@@ -262,8 +261,8 @@ public class Dungeongenerator {
      *
      * @return List of Connector-objects
      */
-    public ArrayList findConnectors() {
-        ArrayList<Connector> connectors = new ArrayList<>();
+    public OwnArrayList findConnectors() {
+        OwnArrayList<Connector> connectors = new OwnArrayList<>();
         for (int y = 1; y < this.height - 2; y++) {
             for (int x = 1; x < this.width - 2; x++) {
                 if (isConnector(x, y)) {
