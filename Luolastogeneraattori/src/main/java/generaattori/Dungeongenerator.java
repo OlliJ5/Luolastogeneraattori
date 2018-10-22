@@ -9,7 +9,7 @@ import tietorakenteet.Unionfind;
  * @author ogrousu
  */
 public class Dungeongenerator {
-
+    
     private int height;
     private int width;
     private String[][] dungeon;
@@ -29,7 +29,7 @@ public class Dungeongenerator {
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
         this.rooms = new OwnArrayList();
-
+        
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 this.dungeon[i][j] = "#";
@@ -70,6 +70,7 @@ public class Dungeongenerator {
         this.placeRooms(amountOfRooms);
         this.placeCorridors();
         this.connectDungeon();
+        this.removeDeadEnds();
         this.makeItPretty();
     }
 
@@ -83,7 +84,7 @@ public class Dungeongenerator {
                 System.out.print(this.dungeon[i][j]);
             }
         }
-
+        
     }
 
     /**
@@ -113,14 +114,14 @@ public class Dungeongenerator {
         if (y < 1 || x < 1 || y >= height - 1 || x >= width - 1) {
             return;
         }
-
+        
         if (dungeon[y][x].equals(".")) {
             return;
         }
         if (!dungeon[y][x].equals("#")) {
             return;
         }
-
+        
         if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= rooms.size()
                 || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= rooms.size()
                 || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= rooms.size()
@@ -129,10 +130,10 @@ public class Dungeongenerator {
                 || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= rooms.size()
                 || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= rooms.size()
                 || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= rooms.size()) {
-
+            
             return;
         }
-
+        
         if (direction.equals(
                 "UP")) {
             if (!dungeon[y - 1][x].equals("#")
@@ -140,7 +141,7 @@ public class Dungeongenerator {
                     || !dungeon[y][x + 1].equals("#")) {
                 return;
             }
-
+            
         } else if (direction.equals(
                 "LEFT")) {
             if (!dungeon[y - 1][x].equals("#")
@@ -148,7 +149,7 @@ public class Dungeongenerator {
                     || !dungeon[y + 1][x].equals("#")) {
                 return;
             }
-
+            
         } else if (direction.equals(
                 "RIGHT")) {
             if (!dungeon[y - 1][x].equals("#")
@@ -156,7 +157,7 @@ public class Dungeongenerator {
                     || !dungeon[y][x + 1].equals("#")) {
                 return;
             }
-
+            
         } else if (direction.equals(
                 "DOWN")) {
             if (!dungeon[y][x - 1].equals("#")
@@ -165,18 +166,18 @@ public class Dungeongenerator {
                 return;
             }
         }
-
+        
         this.dungeon[y][x] = Integer.toString(region);
-
+        
         this.floodFill(y
                 - 1, x, "UP");
-
+        
         this.floodFill(y, x
                 - 1, "LEFT");
-
+        
         this.floodFill(y, x
                 + 1, "RIGHT");
-
+        
         this.floodFill(y
                 + 1, x, "DOWN");
     }
@@ -206,21 +207,21 @@ public class Dungeongenerator {
      */
     public void placeRooms(int amount) {
         Random random = new Random();
-
+        
         for (int i = 0; i < amount; i++) {
             int x = random.nextInt(this.width - 2) + 1;
             int y = random.nextInt(this.height - 2) + 1;
-
+            
             int height = random.nextInt(2) + 2;
             int width = random.nextInt(7) + 2;
-
+            
             Room room = new Room(x, y, width, height, region);
-
+            
             if (room.placeRoom(dungeon, region) != 0) {
                 rooms.add(room);
                 region++;
             }
-
+            
         }
     }
 
@@ -229,7 +230,7 @@ public class Dungeongenerator {
      */
     public void printConnectors() {
         OwnArrayList connectors = findConnectors();
-
+        
         for (int i = 0; i < connectors.size(); i++) {
             System.out.println(connectors.get(i).toString());
         }
@@ -240,19 +241,19 @@ public class Dungeongenerator {
      */
     public void connectDungeon() {
         OwnArrayList<Connector> connectors = findConnectors();
-
+        
         Unionfind u = new Unionfind(connectors.size());
-
+        
         for (int i = 0; i < connectors.size(); i++) {
             if (!u.unified(connectors.get(i).getRegion1(), connectors.get(i).getRegion2())) {
                 u.unify(connectors.get(i).getRegion1(), connectors.get(i).getRegion2());
                 int y = connectors.get(i).getY();
                 int x = connectors.get(i).getX();
-
+                
                 dungeon[y][x] = "/";
             }
         }
-
+        
     }
 
     /**
@@ -285,15 +286,15 @@ public class Dungeongenerator {
         if (!dungeon[y][x].equals("#")) {
             return false;
         }
-
+        
         int differentRegions = 0;
         String region1 = "";
-
+        
         if (!dungeon[y - 1][x].equals("#")) {
             differentRegions++;
             region1 = dungeon[y - 1][x];
         }
-
+        
         if (!dungeon[y][x + 1].equals("#")) {
             if (region1.equals("")) {
                 differentRegions++;
@@ -324,9 +325,9 @@ public class Dungeongenerator {
                 }
             }
         }
-
+        
         return differentRegions >= 2;
-
+        
     }
 
     /**
@@ -338,11 +339,11 @@ public class Dungeongenerator {
      */
     public int[] connectsRegions(int x, int y) {
         int[] regions = new int[2];
-
+        
         if (!dungeon[y - 1][x].equals("#")) {
             regions[0] = Integer.parseInt(dungeon[y - 1][x]);
         }
-
+        
         if (!dungeon[y][x + 1].equals("#")) {
             if (regions[0] == 0) {
                 regions[0] = Integer.parseInt(dungeon[y][x + 1]);
@@ -352,7 +353,7 @@ public class Dungeongenerator {
                 }
             }
         }
-
+        
         if (!dungeon[y + 1][x].equals("#")) {
             if (regions[0] == 0) {
                 regions[0] = Integer.parseInt(dungeon[y + 1][x]);
@@ -360,10 +361,10 @@ public class Dungeongenerator {
                 if (regions[0] != Integer.parseInt(dungeon[y + 1][x])) {
                     regions[1] = Integer.parseInt(dungeon[y + 1][x]);
                 }
-
+                
             }
         }
-
+        
         if (!dungeon[y][x - 1].equals("#")) {
             if (regions[0] == 0) {
                 regions[0] = Integer.parseInt(dungeon[y][x - 1]);
@@ -373,7 +374,7 @@ public class Dungeongenerator {
                 }
             }
         }
-
+        
         return regions;
     }
 
@@ -393,7 +394,7 @@ public class Dungeongenerator {
             }
         }
     }
-
+    
     private boolean isInteger(String possibleNumber) {
         try {
             Integer.parseInt(possibleNumber);
@@ -402,5 +403,58 @@ public class Dungeongenerator {
         }
         return true;
     }
-
+    
+    public void removeDeadEnds() {
+        for (int y = 1; y < this.height - 1; y++) {
+            for (int x = 1; x < this.width - 1; x++) {
+                if (!this.dungeon[y][x].equals("#")) {
+                    deadEndRemover(x, y);
+                    
+                }
+            }
+            
+        }
+    }
+    
+    public void deadEndRemover(int x, int y) {
+        if (this.dungeon[y][x].equals("#")) {
+            return;
+        }
+        
+        int exits = 0;
+        String direction = "";
+        
+        if (!this.dungeon[y - 1][x].equals("#")) {
+            exits++;
+            direction = "UP";
+        }
+        if (!this.dungeon[y][x + 1].equals("#")) {
+            exits++;
+            direction = "RIGHT";
+        }
+        if (!this.dungeon[y + 1][x].equals("#")) {
+            exits++;
+            direction = "DOWN";
+        }
+        if (!this.dungeon[y][x - 1].equals("#")) {
+            exits++;
+            direction = "LEFT";
+        }
+        
+        if (exits == 1) {
+            this.dungeon[y][x] = "#";
+            
+            if (direction.equals("UP")) {
+                deadEndRemover(x, y - 1);
+            } else if (direction.equals("RIGHT")) {
+                deadEndRemover(x + 1, y);
+            } else if (direction.equals("DOWN")) {
+                deadEndRemover(x, y + 1);
+            } else if (direction.equals("LEFT")) {
+                deadEndRemover(x - 1, y);
+            }
+        }
+        
+    }
+    
 }

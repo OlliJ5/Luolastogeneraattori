@@ -65,7 +65,7 @@ public class PerformanceTester {
             long startingTime = System.currentTimeMillis();
             
             Dungeongenerator dungeon = new Dungeongenerator(80, 240);
-            dungeon.generate(2000);
+            dungeon.generate(500);
             
             long finishTime = System.currentTimeMillis();
             
