@@ -61,7 +61,7 @@ public class OwnArrayList<E> {
     }
     
     public void remove(int index) {
-        for(int i = index; i < this.size; i++) {
+        for(int i = index; i < this.size - 1; i++) {
             this.list[i] = this.list[i + 1];
         }
         
