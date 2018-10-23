@@ -40,6 +40,13 @@ public class OwnArrayList<E> {
         return this.size;
     }
     
+    public boolean isEmpty() {
+        if(this.size == 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public E get(int i) {
         return this.list[i];
     }
@@ -51,6 +58,14 @@ public class OwnArrayList<E> {
             }
         }
         return false;
+    }
+    
+    public void remove(int index) {
+        for(int i = index; i < this.size; i++) {
+            this.list[i] = this.list[i + 1];
+        }
+        
+        this.size--;
     }
     
 }

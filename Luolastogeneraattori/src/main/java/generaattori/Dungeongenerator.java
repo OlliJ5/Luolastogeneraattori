@@ -70,7 +70,7 @@ public class Dungeongenerator {
         this.placeRooms(amountOfRooms);
         this.placeCorridors();
         this.connectDungeon();
-        this.removeDeadEnds();
+        //this.removeDeadEnds();
         this.makeItPretty();
     }
 
@@ -94,93 +94,30 @@ public class Dungeongenerator {
         for (int y = 1; y < this.height - 1; y += 2) {
             for (int x = 1; x < this.width - 1; x += 2) {
                 if (checkIfPlaceIsValidForStartingACorridor(x, y)) {
-                    this.floodFill(y, x, "dunno");
+                    CorridorCell cell = new CorridorCell(x, y);
+                    this.buildCorridor(cell);
                     region++;
                 }
             }
         }
     }
 
-    /**
-     * Recursive method that checks if a certain point can be a part of a
-     * corridor in the dungeon. Calls itself to check if the surrounding points
-     * are acceptable spots as well
-     *
-     * @param y the y-value of the spot in the dungeon we are checking
-     * @param x the x-value of the spot in the dungeon we are checking
-     * @param direction the direction in which the corridor is moving
-     */
-    public void floodFill(int y, int x, String direction) {
-        if (y < 1 || x < 1 || y >= height - 1 || x >= width - 1) {
-            return;
-        }
+    
+    public void buildCorridor(CorridorCell cell) {
+        OwnArrayList<CorridorCell> cells = new OwnArrayList<>();
         
-        if (dungeon[y][x].equals(".")) {
-            return;
-        }
-        if (!dungeon[y][x].equals("#")) {
-            return;
-        }
+        cells.add(cell);
+        this.carve(cell);
         
-        if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= rooms.size()
-                || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= rooms.size()
-                || isInteger(dungeon[y][x - 1]) && Integer.parseInt(dungeon[y][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y][x + 1]) && Integer.parseInt(dungeon[y][x + 1]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= rooms.size()) {
-            
-            return;
-        }
         
-        if (direction.equals(
-                "UP")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y][x - 1].equals("#")
-                    || !dungeon[y][x + 1].equals("#")) {
-                return;
-            }
-            
-        } else if (direction.equals(
-                "LEFT")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y][x - 1].equals("#")
-                    || !dungeon[y + 1][x].equals("#")) {
-                return;
-            }
-            
-        } else if (direction.equals(
-                "RIGHT")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y + 1][x].equals("#")
-                    || !dungeon[y][x + 1].equals("#")) {
-                return;
-            }
-            
-        } else if (direction.equals(
-                "DOWN")) {
-            if (!dungeon[y][x - 1].equals("#")
-                    || !dungeon[y][x + 1].equals("#")
-                    || !dungeon[y + 1][x].equals("#")) {
-                return;
-            }
-        }
         
-        this.dungeon[y][x] = Integer.toString(region);
-        
-        this.floodFill(y
-                - 1, x, "UP");
-        
-        this.floodFill(y, x
-                - 1, "LEFT");
-        
-        this.floodFill(y, x
-                + 1, "RIGHT");
-        
-        this.floodFill(y
-                + 1, x, "DOWN");
     }
+    
+    
+    public void carve(CorridorCell cell) {
+        this.dungeon[cell.getY()][cell.getX()] = Integer.toString(this.region);
+    }
+    
 
     /**
      * checks if a corridor can be placed in this position
