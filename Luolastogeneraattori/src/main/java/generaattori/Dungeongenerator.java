@@ -150,13 +150,12 @@ public class Dungeongenerator {
             return false;
         }
 
-        if (dungeon[y][x].equals(".")) {
-            return false;
-        }
         if (!dungeon[y][x].equals("#")) {
             return false;
         }
 
+        //this monstrosity checks if the spot we are checking is too close to a room
+        
         if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= rooms.size()
                 || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= rooms.size()
                 || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= rooms.size()

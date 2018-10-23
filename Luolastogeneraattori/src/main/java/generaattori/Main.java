@@ -10,9 +10,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Dungeongenerator dungeon = new Dungeongenerator(15, 60);
+        Dungeongenerator dungeon = new Dungeongenerator(60, 240);
         
-        dungeon.generate(8);
+        dungeon.generate(200);
         dungeon.print();
 
 //        PerformanceTester tester = new PerformanceTester();
