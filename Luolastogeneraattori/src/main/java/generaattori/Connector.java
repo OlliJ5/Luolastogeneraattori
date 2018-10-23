@@ -1,10 +1,7 @@
 
 package generaattori;
 
-/**
- *
- * @author ogrousu
- */
+
 public class Connector {
     private int x;
     private int y;

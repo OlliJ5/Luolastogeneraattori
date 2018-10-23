@@ -1,12 +1,8 @@
-
 package generaattori;
 
 
-/**
- *
- * @author ogrousu
- */
 public class Room {
+
     private int x;
     private int y;
     private int width;
@@ -15,6 +11,7 @@ public class Room {
 
     /**
      * creates a Room
+     *
      * @param x x-value of the upper left corner of the room
      * @param y y-value of the upper left corner of the room
      * @param width the width of the room
@@ -60,16 +57,14 @@ public class Room {
     public int getHeight() {
         return height;
     }
-    
-    
-    
-    
+
     /**
      * Places a room if it's in an acceptable spot
+     *
      * @param dungeon the dungeon where you want to place the room
      * @param region region number that is used for the room
      * @return returns 0 if the room wasn't placed. the value of the "region"
-     *  otherwise
+     * otherwise
      */
     public int placeRoom(String[][] dungeon, int region) {
         if (checkIfRoomIsValid(dungeon)) {
@@ -79,9 +74,9 @@ public class Room {
                 }
             }
             return region;
-            
+
         }
-        
+
         return 0;
 
     }
@@ -125,22 +120,21 @@ public class Room {
 
     /**
      * Checks if a room is out of bounds
+     *
      * @param dungeon the dungeon which we want to check
      * @return returns true, if some part of the room is outside of the dungeon.
      */
     public boolean isRoomOutOfBounds(String[][] dungeon) {
-        for (int i = x; i < x + width; i++) {
-            if (i < 1 || i >= dungeon[1].length - 1) {
-                return true;
-            }
+        if (this.x < 1
+                || this.x + this.width - 1 >= dungeon[0].length - 1) {
+            return true;
         }
-
-        for (int i = y; i < y + height; i++) {
-            if (i < 1 || i >= dungeon.length - 1) {
-                return true;
-            }
-
+        
+        if (this.y < 1
+                || this.y + this.height - 1 >= dungeon.length - 1) {
+            return true;
         }
+        
         return false;
 
     }
@@ -149,7 +143,6 @@ public class Room {
     public String toString() {
         return "x: " + this.x + "\ny: " + this.y + "\nwidth and height: " + this.width + "x" + this.height;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -180,8 +173,5 @@ public class Room {
         }
         return true;
     }
-    
-    
-    
-    
+
 }

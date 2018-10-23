@@ -14,7 +14,7 @@ public class Dungeongenerator {
     private int width;
     private String[][] dungeon;
     private int region;
-    private OwnArrayList<Room> rooms;
+    private int roomAmount;
 
     /**
      *
@@ -28,7 +28,7 @@ public class Dungeongenerator {
         this.width = width;
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
-        this.rooms = new OwnArrayList();
+        roomAmount = 0;
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -76,15 +76,20 @@ public class Dungeongenerator {
 
     /**
      * The method prints out the the created ASCII-dungeon
+     *
+     * @return Returns the dungeon as a String
      */
-    public void print() {
+    @Override
+    public String toString() {
+        String returnString = "";
         for (int i = 0; i < this.height; i++) {
-            System.out.print("\n");
+            returnString += "\n";
             for (int j = 0; j < this.width; j++) {
-                System.out.print(this.dungeon[i][j]);
+                returnString += this.dungeon[i][j];
             }
         }
 
+        return returnString;
     }
 
     /**
@@ -155,15 +160,14 @@ public class Dungeongenerator {
         }
 
         //this monstrosity checks if the spot we are checking is too close to a room
-        
-        if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= rooms.size()
-                || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= rooms.size()
-                || isInteger(dungeon[y][x - 1]) && Integer.parseInt(dungeon[y][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y][x + 1]) && Integer.parseInt(dungeon[y][x + 1]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= rooms.size()
-                || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= rooms.size()) {
+        if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= roomAmount
+                || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= roomAmount
+                || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= roomAmount
+                || isInteger(dungeon[y][x - 1]) && Integer.parseInt(dungeon[y][x - 1]) <= roomAmount
+                || isInteger(dungeon[y][x + 1]) && Integer.parseInt(dungeon[y][x + 1]) <= roomAmount
+                || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= roomAmount
+                || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= roomAmount
+                || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= roomAmount) {
 
             return false;
         }
@@ -243,7 +247,7 @@ public class Dungeongenerator {
             Room room = new Room(x, y, width, height, region);
 
             if (room.placeRoom(dungeon, region) != 0) {
-                rooms.add(room);
+                roomAmount++;
                 region++;
             }
 
@@ -410,7 +414,7 @@ public class Dungeongenerator {
         for (int y = 1; y < this.height - 1; y++) {
             for (int x = 1; x < this.width - 1; x++) {
                 if (isInteger(dungeon[y][x])) {
-                    if (Integer.parseInt(dungeon[y][x]) <= rooms.size()) {
+                    if (Integer.parseInt(dungeon[y][x]) <= roomAmount) {
                         dungeon[y][x] = " ";
                     } else {
                         dungeon[y][x] = ".";

@@ -26,7 +26,7 @@ public class Tui {
             int rooms = Integer.parseInt(this.scanner.nextLine());
 
             dungeon.generate(rooms);
-            dungeon.print();
+            System.out.println(dungeon.toString());;
             
             System.out.println("\n\n\nType q to quit and c to continue");
             String str = this.scanner.nextLine();

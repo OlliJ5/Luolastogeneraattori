@@ -1,10 +1,6 @@
 
 package tietorakenteet;
 
-/**
- *
- * @author ogrousu
- */
 public class Unionfind {
     private int[] next;
     private int[] size;

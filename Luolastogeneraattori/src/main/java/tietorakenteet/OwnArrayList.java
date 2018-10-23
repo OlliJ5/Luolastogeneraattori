@@ -3,7 +3,6 @@ package tietorakenteet;
 
 /**
  *
- * @author ogrousu
  * @param <E> Type of the objects you want to save in the list
  */
 public class OwnArrayList<E> {
