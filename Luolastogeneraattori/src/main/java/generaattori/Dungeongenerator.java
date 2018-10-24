@@ -158,8 +158,8 @@ public class Dungeongenerator {
         if (!dungeon[y][x].equals("#")) {
             return false;
         }
-        
-        if(cellIsTooCloseToARoom(x, y)) {
+
+        if (cellIsTooCloseToARoom(x, y)) {
             return false;
         }
 
@@ -169,25 +169,29 @@ public class Dungeongenerator {
                         || !dungeon[y][x - 1].equals("#")
                         || !dungeon[y][x + 1].equals("#")) {
                     return false;
-                }   break;
+                }
+                break;
             case "LEFT":
                 if (!dungeon[y - 1][x].equals("#")
                         || !dungeon[y][x - 1].equals("#")
                         || !dungeon[y + 1][x].equals("#")) {
                     return false;
-                }   break;
+                }
+                break;
             case "RIGHT":
                 if (!dungeon[y - 1][x].equals("#")
                         || !dungeon[y + 1][x].equals("#")
                         || !dungeon[y][x + 1].equals("#")) {
                     return false;
-                }   break;
+                }
+                break;
             case "DOWN":
                 if (!dungeon[y][x - 1].equals("#")
                         || !dungeon[y][x + 1].equals("#")
                         || !dungeon[y + 1][x].equals("#")) {
                     return false;
-                }   break;
+                }
+                break;
             default:
                 break;
         }
@@ -309,31 +313,31 @@ public class Dungeongenerator {
         }
 
         int differentRegions = 0;
-        
+
         OwnArrayList<String> regions = new OwnArrayList<>();
-        
-        if(!dungeon[y - 1][x].equals("#")) {
+
+        if (!dungeon[y - 1][x].equals("#")) {
             differentRegions++;
             regions.add(dungeon[y - 1][x]);
         }
-        
-        if(!dungeon[y][x + 1].equals("#")
+
+        if (!dungeon[y][x + 1].equals("#")
                 && !regions.contains(dungeon[y][x + 1])) {
             differentRegions++;
             regions.add(dungeon[y][x + 1]);
         }
-        
-        if(!dungeon[y + 1][x].equals("#")
+
+        if (!dungeon[y + 1][x].equals("#")
                 && !regions.contains(dungeon[y + 1][x])) {
             differentRegions++;
             regions.add(dungeon[y + 1][x]);
         }
-        
-        if(!dungeon[y][x - 1].equals("#")
+
+        if (!dungeon[y][x - 1].equals("#")
                 && !regions.contains(dungeon[y][x - 1])) {
             differentRegions++;
         }
-        
+
         return differentRegions >= 2;
 
     }
@@ -346,44 +350,33 @@ public class Dungeongenerator {
      * @return an array with two values which refer to the connectable regions
      */
     public int[] connectsRegions(int x, int y) {
-        int[] regions = new int[2];
+        OwnArrayList<String> regions = new OwnArrayList<>();
 
         if (!dungeon[y - 1][x].equals("#")) {
-            regions[0] = Integer.parseInt(dungeon[y - 1][x]);
+            regions.add(dungeon[y - 1][x]);
         }
 
-        if (!dungeon[y][x + 1].equals("#")) {
-            if (regions[0] == 0) {
-                regions[0] = Integer.parseInt(dungeon[y][x + 1]);
-            } else {
-                if (regions[0] != Integer.parseInt(dungeon[y][x + 1])) {
-                    regions[1] = Integer.parseInt(dungeon[y][x + 1]);
-                }
-            }
+        if (!dungeon[y][x + 1].equals("#")
+                && !regions.contains(dungeon[y][x + 1])) {
+            regions.add(dungeon[y][x + 1]);
         }
 
-        if (!dungeon[y + 1][x].equals("#")) {
-            if (regions[0] == 0) {
-                regions[0] = Integer.parseInt(dungeon[y + 1][x]);
-            } else {
-                if (regions[0] != Integer.parseInt(dungeon[y + 1][x])) {
-                    regions[1] = Integer.parseInt(dungeon[y + 1][x]);
-                }
-
-            }
+        if (!dungeon[y + 1][x].equals("#")
+                && !regions.contains(dungeon[y + 1][x])) {
+            regions.add(dungeon[y + 1][x]);
         }
 
-        if (!dungeon[y][x - 1].equals("#")) {
-            if (regions[0] == 0) {
-                regions[0] = Integer.parseInt(dungeon[y][x - 1]);
-            } else {
-                if (regions[0] != Integer.parseInt(dungeon[y][x - 1])) {
-                    regions[1] = Integer.parseInt(dungeon[y][x - 1]);
-                }
-            }
+        if (!dungeon[y][x - 1].equals("#")
+                && !regions.contains(dungeon[y][x - 1])) {
+            regions.add(dungeon[y][x - 1]);
         }
 
-        return regions;
+        int[] regionsAsArray = new int[2];
+
+        regionsAsArray[0] = Integer.parseInt(regions.get(0));
+        regionsAsArray[1] = Integer.parseInt(regions.get(1));
+
+        return regionsAsArray;
     }
 
     /**
