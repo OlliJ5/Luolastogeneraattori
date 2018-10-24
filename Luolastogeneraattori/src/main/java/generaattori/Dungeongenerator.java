@@ -255,17 +255,6 @@ public class Dungeongenerator {
     }
 
     /**
-     * methods prints connectors, used for debugging
-     */
-    public void printConnectors() {
-        OwnArrayList connectors = findConnectors();
-
-        for (int i = 0; i < connectors.size(); i++) {
-            System.out.println(connectors.get(i).toString());
-        }
-    }
-
-    /**
      * Method connects the different regions(rooms and corridors) in the dungeon
      */
     public void connectDungeon() {
