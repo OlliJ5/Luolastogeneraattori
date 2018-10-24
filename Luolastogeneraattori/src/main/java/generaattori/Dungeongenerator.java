@@ -158,8 +158,43 @@ public class Dungeongenerator {
         if (!dungeon[y][x].equals("#")) {
             return false;
         }
+        
+        if(cellIsTooCloseToARoom(x, y)) {
+            return false;
+        }
 
-        //this monstrosity checks if the spot we are checking is too close to a room
+        switch (direction) {
+            case "UP":
+                if (!dungeon[y - 1][x].equals("#")
+                        || !dungeon[y][x - 1].equals("#")
+                        || !dungeon[y][x + 1].equals("#")) {
+                    return false;
+                }   break;
+            case "LEFT":
+                if (!dungeon[y - 1][x].equals("#")
+                        || !dungeon[y][x - 1].equals("#")
+                        || !dungeon[y + 1][x].equals("#")) {
+                    return false;
+                }   break;
+            case "RIGHT":
+                if (!dungeon[y - 1][x].equals("#")
+                        || !dungeon[y + 1][x].equals("#")
+                        || !dungeon[y][x + 1].equals("#")) {
+                    return false;
+                }   break;
+            case "DOWN":
+                if (!dungeon[y][x - 1].equals("#")
+                        || !dungeon[y][x + 1].equals("#")
+                        || !dungeon[y + 1][x].equals("#")) {
+                    return false;
+                }   break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    public boolean cellIsTooCloseToARoom(int x, int y) {
         if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= roomAmount
                 || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= roomAmount
                 || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= roomAmount
@@ -169,42 +204,10 @@ public class Dungeongenerator {
                 || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= roomAmount
                 || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= roomAmount) {
 
-            return false;
+            return true;
         }
 
-        if (direction.equals(
-                "UP")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y][x - 1].equals("#")
-                    || !dungeon[y][x + 1].equals("#")) {
-                return false;
-            }
-
-        } else if (direction.equals(
-                "LEFT")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y][x - 1].equals("#")
-                    || !dungeon[y + 1][x].equals("#")) {
-                return false;
-            }
-
-        } else if (direction.equals(
-                "RIGHT")) {
-            if (!dungeon[y - 1][x].equals("#")
-                    || !dungeon[y + 1][x].equals("#")
-                    || !dungeon[y][x + 1].equals("#")) {
-                return false;
-            }
-
-        } else if (direction.equals(
-                "DOWN")) {
-            if (!dungeon[y][x - 1].equals("#")
-                    || !dungeon[y][x + 1].equals("#")
-                    || !dungeon[y + 1][x].equals("#")) {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
     public void carve(CorridorCell cell) {
@@ -306,44 +309,31 @@ public class Dungeongenerator {
         }
 
         int differentRegions = 0;
-        String region1 = "";
-
-        if (!dungeon[y - 1][x].equals("#")) {
+        
+        OwnArrayList<String> regions = new OwnArrayList<>();
+        
+        if(!dungeon[y - 1][x].equals("#")) {
             differentRegions++;
-            region1 = dungeon[y - 1][x];
+            regions.add(dungeon[y - 1][x]);
         }
-
-        if (!dungeon[y][x + 1].equals("#")) {
-            if (region1.equals("")) {
-                differentRegions++;
-                region1 = dungeon[y][x + 1];
-            } else {
-                if (!region1.equals(dungeon[y][x + 1])) {
-                    differentRegions++;
-                }
-            }
+        
+        if(!dungeon[y][x + 1].equals("#")
+                && !regions.contains(dungeon[y][x + 1])) {
+            differentRegions++;
+            regions.add(dungeon[y][x + 1]);
         }
-        if (!dungeon[y + 1][x].equals("#")) {
-            if (region1.equals("")) {
-                differentRegions++;
-                region1 = dungeon[y + 1][x];
-            } else {
-                if (!region1.equals(dungeon[y + 1][x])) {
-                    differentRegions++;
-                }
-            }
+        
+        if(!dungeon[y + 1][x].equals("#")
+                && !regions.contains(dungeon[y + 1][x])) {
+            differentRegions++;
+            regions.add(dungeon[y + 1][x]);
         }
-        if (!dungeon[y][x - 1].equals("#")) {
-            if (region1.equals("")) {
-                differentRegions++;
-                region1 = dungeon[y][x - 1];
-            } else {
-                if (!region1.equals(dungeon[y][x - 1])) {
-                    differentRegions++;
-                }
-            }
+        
+        if(!dungeon[y][x - 1].equals("#")
+                && !regions.contains(dungeon[y][x - 1])) {
+            differentRegions++;
         }
-
+        
         return differentRegions >= 2;
 
     }
