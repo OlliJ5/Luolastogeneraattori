@@ -60,6 +60,40 @@ public class Connector {
     public String toString() {
         return "\nx: " + x + " y: " + y + "    - connects " + region1 + " and " + region2;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Connector other = (Connector) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        if (this.region1 != other.region1) {
+            return false;
+        }
+        if (this.region2 != other.region2) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

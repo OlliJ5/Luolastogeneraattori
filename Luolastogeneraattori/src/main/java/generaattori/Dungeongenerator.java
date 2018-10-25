@@ -65,6 +65,10 @@ public class Dungeongenerator {
         this.roomAmount = roomAmount;
     }
 
+    public void setRegion(int region) {
+        this.region = region;
+    }
+    
     /**
      * The method generates a dungeon with rooms and corridors
      *
@@ -277,7 +281,7 @@ public class Dungeongenerator {
     public void connectDungeon() {
         OwnArrayList<Connector> connectors = findConnectors();
 
-        Unionfind u = new Unionfind(connectors.size());
+        Unionfind u = new Unionfind(region);
 
         for (int i = 0; i < connectors.size(); i++) {
             if (!u.unified(connectors.get(i).getRegion1(), connectors.get(i).getRegion2())) {
