@@ -12,7 +12,7 @@ public class RoomTest {
 
     @Before
     public void setUp() {
-        Dungeongenerator generator = new Dungeongenerator(15, 60);
+        Dungeongenerator generator = new Dungeongenerator(15, 60, 2, 2);
         dungeon = generator.getDungeon();
     }
 

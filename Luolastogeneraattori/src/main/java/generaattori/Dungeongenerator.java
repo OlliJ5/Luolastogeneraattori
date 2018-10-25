@@ -12,6 +12,8 @@ public class Dungeongenerator {
 
     private int height;
     private int width;
+    private int minRoomHeight;
+    private int minRoomWidth;
     private String[][] dungeon;
     private int region;
     private OwnArrayList<Room> rooms;
@@ -24,9 +26,13 @@ public class Dungeongenerator {
      * @param height the desired height of the dungeon
      * @param width the desired width of the dungeon
      */
-    public Dungeongenerator(int height, int width) {
+    public Dungeongenerator(int height, int width, int minRoomHeight, int minRoomWidth) {
         this.height = height;
         this.width = width;
+        
+        this.minRoomHeight = minRoomHeight;
+        this.minRoomWidth = minRoomWidth;
+        
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
         this.rooms = new OwnArrayList<>();
@@ -269,8 +275,8 @@ public class Dungeongenerator {
             int x = random.nextInt(this.width - 2) + 1;
             int y = random.nextInt(this.height - 2) + 1;
 
-            int height = random.nextInt(2) + 2;
-            int width = random.nextInt(7) + 2;
+            int height = random.nextInt(2) + this.minRoomHeight;
+            int width = random.nextInt(7) + this.minRoomWidth;
 
             Room room = new Room(x, y, width, height, region);
 

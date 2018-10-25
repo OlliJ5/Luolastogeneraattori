@@ -15,7 +15,7 @@ public class DungeongeneratorTest {
 
     @Before
     public void setUp() {
-        generator = new Dungeongenerator(15, 60);
+        generator = new Dungeongenerator(15, 60, 2, 2);
     }
 
     @Test

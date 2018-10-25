@@ -26,7 +26,7 @@ public class PerformanceTester {
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
 
-            Dungeongenerator dungeon = new Dungeongenerator(20, 60);
+            Dungeongenerator dungeon = new Dungeongenerator(20, 60, 2, 2);
             dungeon.generate(50);
 
             long finishTime = System.currentTimeMillis();
@@ -45,7 +45,7 @@ public class PerformanceTester {
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
             
-            Dungeongenerator dungeon = new Dungeongenerator(40, 120);
+            Dungeongenerator dungeon = new Dungeongenerator(40, 120, 5, 5);
             dungeon.generate(150);
             
             long finishTime = System.currentTimeMillis();
@@ -64,7 +64,7 @@ public class PerformanceTester {
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
             
-            Dungeongenerator dungeon = new Dungeongenerator(80, 240);
+            Dungeongenerator dungeon = new Dungeongenerator(80, 240, 9, 9);
             dungeon.generate(500);
             
             long finishTime = System.currentTimeMillis();
