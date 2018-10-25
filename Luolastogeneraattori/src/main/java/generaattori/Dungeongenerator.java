@@ -14,6 +14,7 @@ public class Dungeongenerator {
     private int width;
     private String[][] dungeon;
     private int region;
+    private OwnArrayList<Room> rooms;
     private int roomAmount;
 
     /**
@@ -28,7 +29,8 @@ public class Dungeongenerator {
         this.width = width;
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
-        roomAmount = 0;
+        this.rooms = new OwnArrayList<>();
+        this.roomAmount = 0;
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -61,6 +63,11 @@ public class Dungeongenerator {
         return dungeon;
     }
 
+    public OwnArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    
     public void setRoomAmount(int roomAmount) {
         this.roomAmount = roomAmount;
     }
@@ -268,6 +275,7 @@ public class Dungeongenerator {
             Room room = new Room(x, y, width, height, region);
 
             if (room.placeRoom(dungeon, region) != 0) {
+                rooms.add(room);
                 roomAmount++;
                 region++;
             }

@@ -1,6 +1,5 @@
 package generaattori;
 
-
 public class Room {
 
     private int x;
@@ -56,6 +55,10 @@ public class Room {
      */
     public int getHeight() {
         return height;
+    }
+
+    public int getRegionNumber() {
+        return regionNumber;
     }
 
     /**
@@ -129,12 +132,12 @@ public class Room {
                 || this.x + this.width - 1 >= dungeon[0].length - 1) {
             return true;
         }
-        
+
         if (this.y < 1
                 || this.y + this.height - 1 >= dungeon.length - 1) {
             return true;
         }
-        
+
         return false;
 
     }

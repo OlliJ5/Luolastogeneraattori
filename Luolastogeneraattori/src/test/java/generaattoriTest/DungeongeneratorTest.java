@@ -3,6 +3,7 @@ package generaattoriTest;
 import generaattori.Connector;
 import generaattori.CorridorCell;
 import generaattori.Dungeongenerator;
+import generaattori.Room;
 import org.junit.Before;
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,6 +39,39 @@ public class DungeongeneratorTest {
         }
 
         Assert.assertArrayEquals(array, generator.getDungeon());
+    }
+
+    //Tests for room placement start here
+    @Test
+    public void placeRoomsPlacesRooms() {
+        this.generator.placeRooms(6);
+
+        OwnArrayList<Room> rooms = this.generator.getRooms();
+
+        String[][] expected = new String[15][60];
+
+        for (int i = 0; i < expected.length; i++) {
+            for (int j = 0; j < expected[0].length; j++) {
+                expected[i][j] = "#";
+            }
+        }
+
+        for (int i = 0; i < rooms.size(); i++) {
+            int roomX = rooms.get(i).getX();
+            int roomY = rooms.get(i).getY();
+            int region = rooms.get(i).getRegionNumber();
+            int height = rooms.get(i).getHeight();
+            int width = rooms.get(i).getWidth();
+
+            for (int y = roomY; y < roomY + height; y++) {
+                for (int x = roomX; x < roomX + width; x++) {
+                    expected[y][x] = Integer.toString(region);
+                }
+            }
+        }
+        
+        Assert.assertArrayEquals(expected, this.generator.getDungeon());
+
     }
 
     //Tests for corridors start here
@@ -222,7 +256,7 @@ public class DungeongeneratorTest {
 
         this.generator.getDungeon()[8][23] = "4";
         this.generator.getDungeon()[10][23] = "2";
-        
+
         this.generator.setRegion(4);
         this.generator.connectDungeon();
 
@@ -239,10 +273,9 @@ public class DungeongeneratorTest {
         correct[6][35] = "2";
         correct[6][33] = "3";
 
-
         correct[3][23] = "3";
         correct[5][23] = "4";
-        
+
         correct[8][23] = "4";
         correct[10][23] = "2";
 
