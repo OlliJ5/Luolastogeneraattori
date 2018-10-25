@@ -61,6 +61,10 @@ public class Dungeongenerator {
         return dungeon;
     }
 
+    public void setRoomAmount(int roomAmount) {
+        this.roomAmount = roomAmount;
+    }
+
     /**
      * The method generates a dungeon with rooms and corridors
      *
@@ -199,18 +203,24 @@ public class Dungeongenerator {
     }
 
     public boolean cellIsTooCloseToARoom(int x, int y) {
-        if (isInteger(dungeon[y - 1][x - 1]) && Integer.parseInt(dungeon[y - 1][x - 1]) <= roomAmount
-                || isInteger(dungeon[y - 1][x]) && Integer.parseInt(dungeon[y - 1][x]) <= roomAmount
-                || isInteger(dungeon[y - 1][x + 1]) && Integer.parseInt(dungeon[y - 1][x + 1]) <= roomAmount
-                || isInteger(dungeon[y][x - 1]) && Integer.parseInt(dungeon[y][x - 1]) <= roomAmount
-                || isInteger(dungeon[y][x + 1]) && Integer.parseInt(dungeon[y][x + 1]) <= roomAmount
-                || isInteger(dungeon[y + 1][x - 1]) && Integer.parseInt(dungeon[y + 1][x - 1]) <= roomAmount
-                || isInteger(dungeon[y + 1][x]) && Integer.parseInt(dungeon[y + 1][x]) <= roomAmount
-                || isInteger(dungeon[y + 1][x + 1]) && Integer.parseInt(dungeon[y + 1][x + 1]) <= roomAmount) {
+        if (cellIsINaRoom(x - 1, y - 1)
+                || cellIsINaRoom(x, y - 1)
+                || cellIsINaRoom(x + 1, y - 1)
+                || cellIsINaRoom(x - 1, y)
+                || cellIsINaRoom(x + 1, y)
+                || cellIsINaRoom(x - 1, y + 1)
+                || cellIsINaRoom(x, y + 1)
+                || cellIsINaRoom(x + 1, y + 1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public boolean cellIsINaRoom(int x, int y) {
+        if (isInteger(dungeon[y][x]) && Integer.parseInt(dungeon[y][x]) <= roomAmount) {
             return true;
         }
-
         return false;
     }
 

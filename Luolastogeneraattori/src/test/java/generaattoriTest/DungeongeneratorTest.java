@@ -69,9 +69,85 @@ public class DungeongeneratorTest {
     }
     
     @Test
-    public void isCarvableWorksCorrectly() {
-        
+    public void isCarvableReturnsFalseWhenCellIsOnTheBorder() {
+        Assert.assertFalse(this.generator.isCarvable(1, 14, "UP"));
     }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenCellIsNotWall() {
+        this.generator.getDungeon()[3][36] = "3";
+        Assert.assertFalse(this.generator.isCarvable(36, 3, "UP"));
+    }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenCellIsTooCloseToAroom() {
+        this.generator.getDungeon()[7][24] = "2";
+        this.generator.setRoomAmount(2);
+        
+        Assert.assertFalse(this.generator.isCarvable(7, 23, "UP"));
+    }
+    
+    @Test
+    public void isCarvableReturnsTrueWhenCellIsCarvable() {
+        Assert.assertTrue(this.generator.isCarvable(54, 8, "UP"));
+    }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenDirectionIsUpAndItIsNotAllowed() {
+        this.generator.getDungeon()[10][30] = "11";
+        
+        Assert.assertFalse(this.generator.isCarvable(29, 10, "UP"));
+    }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenDirectionIsLEFTAndItIsNotAllowed() {
+        this.generator.getDungeon()[10][30] = "14";
+        
+        Assert.assertFalse(this.generator.isCarvable(30, 9, "LEFT"));
+    }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenDirectionIsRightAndItIsNotAllowed() {
+        this.generator.getDungeon()[10][30] = "13";
+        
+        Assert.assertFalse(this.generator.isCarvable(30, 9, "RIGHT"));
+    }
+    
+    @Test
+    public void isCarvableReturnsFalseWhenDirectionIsDownAndItIsNotAllowed() {
+        this.generator.getDungeon()[10][30] = "2";
+        
+        Assert.assertFalse(this.generator.isCarvable(30, 10, "DOWN"));
+    }
+    
+    @Test
+    public void cellIsTooCloseToARoomReturnsFalseWhenItIsNotTooClose() {
+        Assert.assertFalse(this.generator.cellIsTooCloseToARoom(30, 10));
+    }
+    
+    @Test
+    public void cellIsTooCloseToARoomReturnsTrueWhenItIsTooClose() {
+        this.generator.getDungeon()[10][30] = "2";
+        this.generator.setRoomAmount(2);
+        
+        Assert.assertTrue(this.generator.cellIsTooCloseToARoom(29, 9));
+    }
+    
+    @Test
+    public void cellIsInaRoomReturnsTrueWhenItIs() {
+        this.generator.getDungeon()[7][46] = "3";
+        this.generator.setRoomAmount(3);
+        
+        Assert.assertTrue(this.generator.cellIsINaRoom(46, 7));
+    }
+    
+    @Test
+    public void cellIsInaRoomReturnsFalseWhenItIsNot() {
+        this.generator.getDungeon()[7][46] = "3";
+        
+        Assert.assertFalse(this.generator.cellIsINaRoom(46, 7));
+    }
+    
     
     @Test
     public void carvingWorksCorrectly() {
