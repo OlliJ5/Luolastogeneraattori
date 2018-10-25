@@ -10,14 +10,14 @@ public class PerformanceTester {
     }
     
     public void testPerformance() {
-        System.out.println("Pieni luolasto:");
+        System.out.println("Small dungeon: (20x60)");
         this.smallDungeonTest();
         
-        System.out.println("Keskikokoinen luolasto:");
+        System.out.println("Medium dungeon: (40x120)");
         this.mediumDungeonTest();
         
-        System.out.println("Iso luolasto:");
-        this.bigDungeon();
+        System.out.println("Medium-large dungeon: (80x240)");
+        this.mediumLargeDungeon();
     }
     
     
@@ -34,10 +34,10 @@ public class PerformanceTester {
             long totalTime = finishTime - startingTime;
             mean += totalTime;
 
-            System.out.println("Operaatioon kului: " + totalTime + " ms");
+            System.out.println("The operation took: " + totalTime + " ms");
         }
 
-        System.out.println("Keskiarvo " + (mean /= 10) + " ms\n");
+        System.out.println("Mean " + (mean /= 10) + " ms\n");
     }
     
     public void mediumDungeonTest() {
@@ -53,13 +53,13 @@ public class PerformanceTester {
             long totalTime = finishTime - startingTime;
             mean += totalTime;
             
-            System.out.println("Operaatioon kului: " + totalTime + " ms" );
+            System.out.println("The opertation took: " + totalTime + " ms" );
         }
         
-        System.out.println("Keskiarvo " + (mean /= 10) + " ms\n");
+        System.out.println("Mean " + (mean /= 10) + " ms\n");
     }
     
-    public void bigDungeon() {
+    public void mediumLargeDungeon() {
         long mean = 0;
         for(int i = 0; i < 10; i++) {
             long startingTime = System.currentTimeMillis();
@@ -72,9 +72,9 @@ public class PerformanceTester {
             long totalTime = finishTime - startingTime;
             mean += totalTime;
             
-            System.out.println("Operaatioon kului: " + totalTime + " ms");
+            System.out.println("The operation took: " + totalTime + " ms");
         }
         
-        System.out.println("Keskiarvo " + (mean /=10 ) + " ms\n");
+        System.out.println("Mean " + (mean /=10 ) + " ms\n");
     }
 }

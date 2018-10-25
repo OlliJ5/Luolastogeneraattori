@@ -29,10 +29,10 @@ public class Dungeongenerator {
     public Dungeongenerator(int height, int width, int minRoomHeight, int minRoomWidth) {
         this.height = height;
         this.width = width;
-        
+
         this.minRoomHeight = minRoomHeight;
         this.minRoomWidth = minRoomWidth;
-        
+
         this.dungeon = new String[this.height][this.width];
         this.region = 1;
         this.rooms = new OwnArrayList<>();
@@ -73,7 +73,6 @@ public class Dungeongenerator {
         return rooms;
     }
 
-    
     public void setRoomAmount(int roomAmount) {
         this.roomAmount = roomAmount;
     }
@@ -81,7 +80,7 @@ public class Dungeongenerator {
     public void setRegion(int region) {
         this.region = region;
     }
-    
+
     /**
      * The method generates a dungeon with rooms and corridors
      *
