@@ -5,6 +5,22 @@
 
 Porjektissa on käytetty JUnit-testejä.
 
+### Testikattavuus
+
+<img src="https://github.com/OlliJ5/Luolastogeneraattori/blob/master/documentation/testikattavuus.png" width="800">
+
+Sovelluksessa tietorakenteiden testeissä sekä rivikattavuus ja haarautumakattavuus ovat 100%.
+
+Generaattori-pakkauksessa, jossa kaikki sovelluksen oleellinen työ tehdään, rivikattavuus on 93% ja haarautumakattavuus on 
+81%. Connector- ja CorridorCell-luokissa ei ollut varsinaisesti mitään testattavaa, sillä niissä on vain valmiiksi generoituja metodeja get ja equals. Olen kuitenkin getterit testannut läpi.
+Koko sovelluksen tärkein testikohde on Dungeongenerator-luokka, joka vastaa koko algoritmin toiminnasta. Tämän luokan metodeja olen testannut melko kattavasti perustilanteita läpikäyden. Testejä voisi kuitenkin olla kattavammin ja käydä tarkemmin rajatapauksiakin läpi. Käytävien rakentamisen testaaminen oli erityisesti hankalaa, sillä siinä käytettiin satunnaisuutta käytävän seuraavana suuntana, joten se on tällä hetkellä heikoiten testattu asia.
+
+Suorituskyvyn testaamisesta vastaavan paketin ainoaa luokkaa PerformanceTester, en ole testannut ollenkaan, sillä  en kokenut sen testaamisen tuovan mitään oleellista.
+
+Myöskään UI-paketin Tui-luokkaa, joka vastaa ohjelman käyttöliittymästä, ei ole testattu yksikkötesteillä ollenkaan.
+
+
+
 ## Suorituskyky
 
 Suorituskyvyn testauksen avuksi on luotu oma luokka PerformanceTester, joka testaa algoritmin suoritusaikaa eri parametrein. 
