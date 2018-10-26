@@ -143,11 +143,6 @@ public class Room {
     }
 
     @Override
-    public String toString() {
-        return "x: " + this.x + "\ny: " + this.y + "\nwidth and height: " + this.width + "x" + this.height;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

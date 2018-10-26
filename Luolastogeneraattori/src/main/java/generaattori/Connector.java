@@ -57,11 +57,6 @@ public class Connector {
     
 
     @Override
-    public String toString() {
-        return "\nx: " + x + " y: " + y + "    - connects " + region1 + " and " + region2;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 5;
         return hash;

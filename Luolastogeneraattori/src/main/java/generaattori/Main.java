@@ -10,13 +10,13 @@ public class Main {
 
 
     public static void main(String[] args) {
-//        Dungeongenerator dungeon = new Dungeongenerator(30, 120, 5, 5);
+//        Dungeongenerator dungeon = new Dungeongenerator(15, 60, 2, 2);
 //        
-//        dungeon.generate(30);
+//        dungeon.generate(7);
 //        System.out.println(dungeon.toString());
 
 //        PerformanceTester tester = new PerformanceTester();
-//        tester.bigDungeon();
+//        tester.smallDungeonTest();
           
         Tui teksikayttoliittyma = new Tui(new Scanner(System.in));
         teksikayttoliittyma.start();

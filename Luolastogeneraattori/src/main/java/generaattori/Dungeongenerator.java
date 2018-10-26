@@ -423,15 +423,6 @@ public class Dungeongenerator {
         }
     }
 
-    private boolean isInteger(String possibleNumber) {
-        try {
-            Integer.parseInt(possibleNumber);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
     public void removeDeadEnds() {
         for (int y = 1; y < this.height - 1; y++) {
             for (int x = 1; x < this.width - 1; x++) {
@@ -445,10 +436,6 @@ public class Dungeongenerator {
     }
 
     public void deadEndRemover(int x, int y) {
-        if (this.dungeon[y][x].equals("#")) {
-            return;
-        }
-
         int exits = 0;
         String direction = "";
 
@@ -469,7 +456,9 @@ public class Dungeongenerator {
             direction = "LEFT";
         }
 
-        if (exits == 1) {
+        if (exits == 0) {
+            this.dungeon[y][x] = "#";
+        } else if (exits == 1) {
             this.dungeon[y][x] = "#";
 
             if (direction.equals("UP")) {
@@ -483,6 +472,15 @@ public class Dungeongenerator {
             }
         }
 
+    }
+
+    private boolean isInteger(String possibleNumber) {
+        try {
+            Integer.parseInt(possibleNumber);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
 }

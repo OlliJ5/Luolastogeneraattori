@@ -4,6 +4,7 @@ import generaattori.Connector;
 import generaattori.CorridorCell;
 import generaattori.Dungeongenerator;
 import generaattori.Room;
+import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,6 +42,19 @@ public class DungeongeneratorTest {
         Assert.assertArrayEquals(array, generator.getDungeon());
     }
 
+    @Test
+    public void toStringWorks() {
+        String dungeonAsString = "";
+        for (int i = 0; i < this.generator.getHeight(); i++) {
+            dungeonAsString += "\n";
+            for (int j = 0; j < generator.getWidth(); j++) {
+                dungeonAsString += this.generator.getDungeon()[i][j];
+            }
+        }
+        
+        Assert.assertEquals(dungeonAsString, this.generator.toString());
+    }
+
     //Tests for room placement start here
     @Test
     public void placeRoomsPlacesRooms() {
@@ -69,12 +83,12 @@ public class DungeongeneratorTest {
                 }
             }
         }
-        
+
         Assert.assertArrayEquals(expected, this.generator.getDungeon());
 
     }
 
-    //Tests for corridors start here
+    //Tests for corridor building start here
     @Test
     public void ReturnsFalseWhenCorridorCannotBeStartedHere() {
         this.generator.getDungeon()[5][8] = " ";
@@ -192,6 +206,22 @@ public class DungeongeneratorTest {
         Assert.assertEquals(".", this.generator.getDungeon()[6][40]);
     }
 
+    @Test
+    public void buildCorridorsBuildsSomething() {
+        String[][] emptyDungeon = new String[15][60];
+
+        for (int i = 0; i < emptyDungeon.length; i++) {
+            for (int j = 0; j < emptyDungeon[0].length; j++) {
+                emptyDungeon[i][j] = "#";
+            }
+        }
+
+        this.generator.buildCorridors();
+
+        Assert.assertFalse(Arrays.equals(emptyDungeon, this.generator.getDungeon()));
+
+    }
+
     //Tests for connecting the dungeon start here
     @Test
     public void isConnectorReturnsTrueWhenCellIsAConnector() {
@@ -285,6 +315,23 @@ public class DungeongeneratorTest {
 
         Assert.assertArrayEquals(correct, this.generator.getDungeon());
 
+    }
+
+    //Test for removing dead-ends start here
+    @Test
+    public void removingDeadEndsFromAnUnconnectedDungeonRemovesEverything() {
+        String[][] empty = new String[15][60];
+
+        for (int i = 0; i < empty.length; i++) {
+            for (int j = 0; j < empty[0].length; j++) {
+                empty[i][j] = "#";
+            }
+        }
+
+        this.generator.buildCorridors();
+        this.generator.removeDeadEnds();
+
+        Assert.assertArrayEquals(empty, this.generator.getDungeon());
     }
 
 }
