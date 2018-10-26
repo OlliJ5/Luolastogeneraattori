@@ -138,7 +138,7 @@ public class Tui {
         int height;
         do {
             System.out.println("Please enter the desired height of the maze\n"
-                    + "(min 10 and max 500)");
+                    + "(min 10 and max 256)");
             while (!scanner.hasNextInt()) {
                 scanner.next();
             }
@@ -151,7 +151,7 @@ public class Tui {
         int width;
         do {
             System.out.println("Please enter the desired width of the maze\n"
-                    + "(min 10 and max 500)");
+                    + "(min 10 and max 256)");
             while (!scanner.hasNextInt()) {
                 scanner.next();
             }
