@@ -4,11 +4,10 @@
 Toteutan työssäni luolastogeneraattorin, joka koostuu useasta pienemmästä osasta.
 
 Ensin pitää luoda luolaston huoneet. Tässä käytetään apuna satunnaisuutta.
-Sitten luodaan luolastoon käytäviä ja yhdistetään luolasto virittävän puun avulla. Virittävän puun selvitän Kruskalin algoritmillä.
+Sitten luodaan luolastoon käytäviä ja yhdistetään luolasto virittävän puun avulla. Virittävän puun selvitän Kruskalin algoritmillä. Tämän jälkeen käytävistä poistetaan umpikujat.
 
-Työssä tarvitsemiani tietorakenteita ovat ainakin taulukot ja Union find
+Työssä tarvitsemiani tietorakenteita ovat ainakin taulukot, lista ja Union find
 
-Käytetyt algoritmit ja tietorakenteet selkeytyvät työn edetessä ja päivitän siten tätä dokumenttia, mutta tässä on alustava runko.
 
 #### Mitä ongelmaa ratkaiset ja miksi valitsit kyseiset algoritmit/tietorakenteet
 Luon luolastogeneraattorin, jonka avulla voi luoda satunnaisia luolastoja peleihin. Tämä lisää pelien pelattavuutta tuomalla niihin
@@ -25,6 +24,8 @@ salliessa luolaston huondeiden ja käytävien määrät ovat ainakin tietyssä m
 #### Tavoitteena olevat aika- ja tilavaativuudet (m.m. O-analyysit)
 Luolaston huoneiden lisäämisen pitäisi toimia ainakin lineaarisessa ajassa lisättyjen huoneiden määrään eli O(n)
 Huoneen lisääminen ei vie huomattavaa määrää tilaa, joten tilavaativuus on vakio O(1)
+
+Käytävien lisäämisen aikavaativuus on O(n^2)
 
 Kruskalin algoritmin aikavaativuus on O(n + m log n), joten se on tavoitteena. Tilavaativuutena on O(n log m)
 
