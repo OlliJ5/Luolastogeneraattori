@@ -1,8 +1,7 @@
-
 package generaattori;
 
-
 public class Connector {
+
     private int x;
     private int y;
     private int region1;
@@ -10,6 +9,7 @@ public class Connector {
 
     /**
      * Creates a connector that can connect two regions together
+     *
      * @param x x-value of the connector
      * @param y y-value of the connector
      * @param region1 one of the regions it can connect
@@ -53,8 +53,6 @@ public class Connector {
     public int getRegion2() {
         return region2;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -88,7 +86,5 @@ public class Connector {
         }
         return true;
     }
-    
-    
-    
+
 }

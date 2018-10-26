@@ -57,6 +57,10 @@ public class Room {
         return height;
     }
 
+    /**
+     *
+     * @return the region of the room
+     */
     public int getRegionNumber() {
         return regionNumber;
     }

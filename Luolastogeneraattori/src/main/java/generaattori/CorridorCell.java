@@ -1,8 +1,7 @@
-
 package generaattori;
 
-
 public class CorridorCell {
+
     private int x;
     private int y;
 
@@ -11,10 +10,18 @@ public class CorridorCell {
         this.y = y;
     }
 
+    /**
+     *
+     * @return the x-value of the cell
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return the y-value of the cell
+     */
     public int getY() {
         return y;
     }
@@ -45,6 +52,5 @@ public class CorridorCell {
         }
         return true;
     }
-    
-    
+
 }

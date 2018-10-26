@@ -143,7 +143,7 @@ public class Tui {
                 scanner.next();
             }
             height = scanner.nextInt();
-        } while (height < 10 || height > 500);
+        } while (height < 10 || height > 256);
 
         this.height = height;
         scanner.nextLine();
@@ -156,7 +156,7 @@ public class Tui {
                 scanner.next();
             }
             width = scanner.nextInt();
-        } while (width < 10 || width > 500);
+        } while (width < 10 || width > 256);
 
         this.width = width;
         scanner.nextLine();
